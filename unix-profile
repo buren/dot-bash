@@ -181,6 +181,10 @@ alias gshow='git show  --color'
 alias glog='git log --graph --full-history --all --color'
 alias gadd='git add .'
 
+function gcommit {
+  git add .
+  git commit -m "$1"
+}
 
 function gpush {
   git add .
