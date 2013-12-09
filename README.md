@@ -5,3 +5,5 @@
 
 #### Notes
   Some of the aliases are Ubuntu specific, others use apt-get
+  Update:
+    $ source_dot_bash_files

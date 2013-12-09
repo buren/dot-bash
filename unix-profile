@@ -193,20 +193,22 @@ function gpush {
 }
 
 function gitfuckit {
-  git add .
-  git commit -m "update"
-  git push origin ${1-master}
+  gpush ${1-master} "update"
 }
 
-# Heroku deploy
+
+## __HEROKU__ ##
 alias hdeploy='git push heroku master'
+alias hconsole='heroku run console'
+alias hmigrate='heroku run rake db:migrate && heroku restart'
 
 
 
 ## __UTILITY SCRIPT__ ##
 
-alias download='rvm use 2.0.0 && ~/scripts/downloader.thor fetch'
-
+if [ -f ~/scripts/downloader.thor ]; then
+  alias download='rvm use 2.0.0 && ~/scripts/downloader.thor fetch'
+fi
 
 
 ## __MISC__ ##
