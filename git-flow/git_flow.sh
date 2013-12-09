@@ -1,4 +1,6 @@
 function pvg-dev-help {
+  echo -e "description: "
+  echo -e "\t start working on your feature."
   echo -e "usage: "
   echo -e "\t pvg-dev a_branch_name"
   echo ""
@@ -36,11 +38,13 @@ function pvg-dev-done-help {
 
 function pvg-dev-done {
   git commit -am $1
-  FEATURE_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-  git push origin $($FEATURE_BRANCH)
+  local BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+  git push origin $BRANCH
   git checkout master
   git pull origin master
-  git merge $($FEATURE_BRANCH)
+  git merge $BRANCH
+  echo "Fix your (potential) conflicts and then run:"
+  echo -e "\t pvg-ready-to-release"
 }
 
 function pvg-ready-to-release-help {
@@ -50,8 +54,8 @@ function pvg-ready-to-release-help {
 }
 
 function pvg-ready-to-release {
-  CURRENT_BRANCH =$(git rev-parse --abbrev-ref HEAD)
-  if [ "$($CURRENT_BRANCH)" == "master" ]; then
+  local BRANCH=$(git rev-parse --abbrev-ref HEAD)
+  if [ $BRANCH == "master" ]; then
       git commit -am 'Fixed merge conflict' # Will not create commit if clean working set
       git push origin master
   else
