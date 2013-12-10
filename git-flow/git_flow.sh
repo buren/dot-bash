@@ -1,3 +1,7 @@
+function pvg-init-env {
+  git clone git@github.com:buren/enduro.git
+}
+
 function pvg-dev-help {
   echo -e "description: "
   echo -e "\t start working on your feature."
