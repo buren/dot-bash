@@ -1,7 +1,12 @@
 # dot-bash import
 function source_dot_bash_files {
   source ~/.dot-bash/unix-profile
-  source ~/.dot-bash/git-flow/git_flow.sh
+
+  if [ -f ~/.git-story/src/git_story.sh ]; then
+    source ~/.git-story/src/git_story.sh
+  else
+    cd ~ && git clone git@github.com:buren/git-story.git && mv git-story .git-story && source ~/.git-story/src/git_story.sh
+  fi
   if [ "$(uname)" == "Darwin" ]; then
       source ~/.dot-bash/osx-profile
   elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
