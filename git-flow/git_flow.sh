@@ -12,13 +12,13 @@ function pvg {
 
 function __pvg_functions {
   if   [ $1 == "dev" ]; then
-    __pvg-dev
+    __pvg-dev $2
   elif [ $1 == "update" ]; then
     __pvg-update
   elif [ $1 == "checkpoint" ]; then
-    __pvg-checkpoint
+    __pvg-checkpoint $2
   elif [ $1 == "done" ]; then
-    __pvg-ready
+    __pvg-ready $2
   elif [ $1 == "release" ]; then
     __pvg-release
   elif [ $1 == "list" ]; then
