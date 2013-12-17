@@ -1,4 +1,3 @@
-
 ################
 #     CLI      #
 ################
@@ -7,19 +6,19 @@ function pvg {
   if   [ -z "$1" ] || [ $1 == "help" ]; then
     __pvg-help $2
   else
-    __pvg_functions $1 $2
+    __pvg_functions "$1" "$2"
   fi
 }
 
 function __pvg_functions {
   if   [ $1 == "dev" ]; then
-    __pvg-dev $2
+    __pvg-dev "$2"
   elif [ $1 == "update" ]; then
     __pvg-update
   elif [ $1 == "checkpoint" ]; then
-    __pvg-checkpoint $2
+    __pvg-checkpoint "$2"
   elif [ $1 == "done" ]; then
-    __pvg-ready $2
+    __pvg-ready "$2"
   elif [ $1 == "release" ]; then
     __pvg-release
   elif [ $1 == "list" ]; then
@@ -80,7 +79,7 @@ function __pvg-checkpoint {
     __pvg-checkpoint-help
   else
     git add --all
-    git commit -m $1
+    git commit -m "$1"
   fi
 }
 
@@ -89,7 +88,7 @@ function __pvg-ready {
   while true; do
     read -p "Have you answered yes to all of the above? (y\n)" yn
     case $yn in
-      [Yy]* ) __pvg-ready-execute $1; break;;
+      [Yy]* ) __pvg-ready-execute "$1"; break;;
       [Nn]* ) break;;
       * ) echo "Please answer yes or no.";;
     esac
@@ -108,7 +107,8 @@ function __pvg-ready-execute {
     git checkout master
     git pull origin master
     git merge $BRANCH
-    git commit -am "Fixed merge conflict" # Will not create commit if clean working set
+    git add --all
+    git commit -m "Fixed merge conflict" # Will not create commit if clean working set
     echo -e "When ready run: "
     echo -e "\t pvg release"
   fi
