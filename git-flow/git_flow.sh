@@ -98,12 +98,12 @@ function __pvg-ready {
 }
 
 function __pvg-ready-execute {
-  git add --all
-  git commit -m $1
   if [[ -z "$1" ]]; then
     echo "You must provide a commit message!"
     __pvg-ready-help
   else
+    git add --all
+    git commit -m $1
     local BRANCH="$(git rev-parse --abbrev-ref HEAD)"
     git push origin $BRANCH
     git checkout master
