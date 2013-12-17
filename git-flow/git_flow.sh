@@ -23,6 +23,8 @@ function __pvg_functions {
     __pvg-release
   elif [ $1 == "list" ]; then
     __pvg-list-commands
+  elif [ $1 == "diff" ]; then
+    __pvg-diff
   else
     echo "Unknown command '$1'"
     __pvg-help
@@ -42,6 +44,8 @@ function __pvg-help {
     __pvg-ready-help
   elif [ $1 == "release" ]; then
     __pvg-release-help
+  elif [ $1 == "diff" ]; then
+    __pvg-diff-help
   else
     echo "Unknown command: '$1'"
     echo ""
@@ -119,6 +123,10 @@ function __pvg-release {
       * ) echo "Please answer yes or no.";;
     esac
   done
+}
+
+function __pvg-diff {
+  git diff --color
 }
 
 function __pvg-release-execute {
@@ -208,4 +216,10 @@ function __pvg-release-help {
   echo -e "usage: "
   echo -e "\t pvg release"
   echo -e "pushes your committed changes to the repository."
+}
+
+function __pvg-diff-help {
+  echo "usage: "
+  echo -e "\t pvg diff"
+  echo "shows all your uncommitted changes"
 }
