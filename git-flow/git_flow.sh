@@ -101,7 +101,7 @@ function __pvg-ready-execute {
     __pvg-ready-help
   else
     git add --all
-    git commit -m $1
+    git commit -m "$1"
     local BRANCH="$(git rev-parse --abbrev-ref HEAD)"
     git push origin $BRANCH
     git checkout master
