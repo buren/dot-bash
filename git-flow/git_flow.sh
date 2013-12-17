@@ -66,6 +66,7 @@ function __pvg-help {
 function __pvg-dev {
   if [[ -z "$1" ]]; then
     echo "You must provide a branch name"
+    echo "Missing argument <branch_name>"
     __pvg-dev-help
   else
     git checkout master
@@ -83,6 +84,7 @@ function __pvg-update {
 function __pvg-checkpoint {
   if [[ -z "$1" ]]; then
     echo "You must provide a commit message"
+    echo "Missing argument <'Commit message'>"
     __pvg-checkpoint-help
   else
     git add --all
