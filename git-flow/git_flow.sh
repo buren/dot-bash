@@ -25,6 +25,8 @@ function __pvg_functions {
     __pvg-list-commands
   elif [ $1 == "diff" ]; then
     __pvg-diff
+  elif [ $1 == "switchto" ]; then
+    __pvg-switchto "$2"
   else
     echo "Unknown command '$1'"
     __pvg-help
@@ -46,6 +48,8 @@ function __pvg-help {
     __pvg-release-help
   elif [ $1 == "diff" ]; then
     __pvg-diff-help
+  elif [ $1 == "switchto" ]; then
+    __pvg-switchto-help
   else
     echo "Unknown command: '$1'"
     echo ""
@@ -127,10 +131,6 @@ function __pvg-release {
   done
 }
 
-function __pvg-diff {
-  git diff --color
-}
-
 function __pvg-release-execute {
   local BRANCH=$(git rev-parse --abbrev-ref HEAD)
   if [ $BRANCH == "master" ]; then
@@ -144,6 +144,14 @@ function __pvg-release-execute {
     echo "or for a specific command"
     echo -e "\t pvg help 'command'"
   fi
+}
+
+function __pvg-diff {
+  git diff --color
+}
+
+function __pvg-switchto {
+  git checkout $1
 }
 
 ################
@@ -224,4 +232,10 @@ function __pvg-diff-help {
   echo "usage: "
   echo -e "\t pvg diff"
   echo "shows all your uncommitted changes"
+}
+
+function __pvg-switchto-help {
+  echo "usage: "
+  echo -e "\t pvg switchto branch_name"
+  echo "change the current workspace to branch_name"
 }
