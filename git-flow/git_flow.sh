@@ -1,3 +1,5 @@
+git config --global color.ui auto
+
 ################
 #     CLI      #
 ################
@@ -112,16 +114,15 @@ function __pvg-ready-execute {
     git checkout master
     git pull origin master
     git merge $BRANCH
-    git add --all
-    git commit -m "Fixed merge conflict" # Will not create commit if clean working set
-    echo -e "When ready run: "
+    echo -e "If any merge conflicts fix them and run:"
+    echo -e "\t pvg checkpoint 'message'"
+    echo -e "If no conflicts:"
     echo -e "\t pvg release"
   fi
 }
 
 function __pvg-release {
   while true; do
-    echo -e ""
     read -p "Are you sure you want to release? (y\n)" yn
     case $yn in
       [Yy]* ) __pvg-release-execute; break;;
@@ -147,7 +148,7 @@ function __pvg-release-execute {
 }
 
 function __pvg-diff {
-  git diff --color
+  git diff
 }
 
 function __pvg-switchto {
