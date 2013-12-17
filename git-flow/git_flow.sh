@@ -54,10 +54,15 @@ function __pvg-help {
 ################
 
 function __pvg-dev {
-  git checkout master
-  git checkout -b $1
-  git pull origin master
-  echo -e "You're now ready to develop your story."
+  if [[ -z "$1" ]]; then
+    echo "You must provide a branch name"
+    __pvg-dev-help
+  else
+    git checkout master
+    git pull origin master
+    git checkout -b $1
+    echo -e "You're now ready to implement your feature"
+  fi
 }
 
 function __pvg-update {
@@ -65,8 +70,13 @@ function __pvg-update {
 }
 
 function __pvg-checkpoint {
-  git add --all
-  git commit -m $1
+  if [[ -z "$1" ]]; then
+    echo "You must provide a commit message"
+    __pvg-checkpoint-help
+  else
+    git add --all
+    git commit -m $1
+  fi
 }
 
 function __pvg-ready {
@@ -89,14 +99,19 @@ function __pvg-ready {
 function __pvg-ready-execute {
   git add --all
   git commit -m $1
-  local BRANCH="$(git rev-parse --abbrev-ref HEAD)"
-  git push origin $BRANCH
-  git checkout master
-  git pull origin master
-  git merge $BRANCH
-  git commit -am "Fixed merge conflict" # Will not create commit if clean working set
-  echo -e "When ready run: "
-  echo -e "\t pvg release"
+  if [[ -z "$1" ]]; then
+    echo "You must provide a commit message!"
+    __pvg-ready-help
+  else
+    local BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+    git push origin $BRANCH
+    git checkout master
+    git pull origin master
+    git merge $BRANCH
+    git commit -am "Fixed merge conflict" # Will not create commit if clean working set
+    echo -e "When ready run: "
+    echo -e "\t pvg release"
+  fi
 }
 
 function __pvg-release {
