@@ -65,6 +65,7 @@ function __pvg-dev {
     git checkout master
     git pull origin master
     git checkout -b $1
+    git branch
     echo -e "You're now ready to implement your feature"
   fi
 }
