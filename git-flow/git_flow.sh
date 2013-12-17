@@ -1,4 +1,3 @@
-
 ################
 #     CLI      #
 ################
@@ -81,12 +80,7 @@ function __pvg-checkpoint {
 }
 
 function __pvg-ready {
-  echo "Checklist:"
-  echo -e "\t 1. Have you written tests?"
-  echo -e "\t 2. Do all tests pass?"
-  echo -e "\t 3. Have you refactored your code?"
-  echo -e "\t 4. Are you ready for possible merge conflicts?"
-  echo ""
+  __pvg-ready-checklist-print
   while true; do
     read -p "Have you answered yes to all of the above? (y\n)" yn
     case $yn in
@@ -199,6 +193,15 @@ function __pvg-ready-help {
   echo -e "\t etc.....'"
   echo -e "note: "
   echo -e "\t ! Can cause merge conflicts"
+}
+
+function __pvg-ready-checklist-print {
+  echo "Checklist:"
+  echo -e "\t 1. Have you written tests?"
+  echo -e "\t 2. Do all tests pass?"
+  echo -e "\t 3. Have you refactored your code?"
+  echo -e "\t 4. Are you ready for possible merge conflicts?"
+  echo ""
 }
 
 function __pvg-release-help {
