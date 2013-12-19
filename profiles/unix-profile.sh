@@ -252,7 +252,7 @@ alias hmigrate='heroku run rake db:migrate && heroku restart'
 
 function download {
   if [ -f ~/.buren/util_scripts/downloader.thor ]; then
-    rvm use 2.0.0 && ~/.buren/util_scripts/downloader.thor fetch
+    rvm use 2.0.0 && ~/.buren/util_scripts/downloader.thor fetch "$@"
   else
     echo "Cannot find ~/.buren/util_scripts/downloader.thor"
   fi
