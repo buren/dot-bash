@@ -19,6 +19,7 @@ function __dot-bash-install-ngrok {
   fi
 
   unzip ngrok.zip
+  rm ngrok.zip
 
   mkdir ~/.buren/bin
   mv ngrok ~/.buren/bin
