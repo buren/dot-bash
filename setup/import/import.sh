@@ -7,7 +7,7 @@ else
 fi
 
 if [ ! -d ~/.buren/util_scripts/ ]; then
-  cd ~/.buren && git clone git clone git@github.com:buren/util_scripts.git
+  cd ~/.buren && git clone git@github.com:buren/util_scripts.git
 fi
 
 if [ "$(uname)" == "Darwin" ]; then
