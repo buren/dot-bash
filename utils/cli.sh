@@ -13,6 +13,8 @@ function __buren_functions {
     __b_self_destruct
   elif [[ "$1" == "update" ]]; then
     __b_update "$2"
+  elif [[ "$1" == "setup" ]]; then
+  __b_setup "$2"
   else
     echo "Unknown command '$1'"
     __buren-help
@@ -84,6 +86,20 @@ function __b_update_util_scripts {
     cd ~/.buren/util_scripts && git pull origin master
 }
 
+function __b_setup {
+   if [ "$1" == "os" ]; then
+    __b_setup_os
+  fi
+}
+
+function __b_setup_os {
+  if [[ "$(uname)" == "Darwin" ]]; then
+    sh ~/.buren/setup/os-install/install-osx.sh
+  elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
+    sh ~/.buren/setup/os-install/install-linux.sh
+  fi
+}
+
 
 ###############
 #             HELP            #
@@ -95,5 +111,4 @@ function __buren-help {
   echo -e "\t buren self-destruct"
   echo "help:"
   echo -e "\t buren <command> -help"
-
 }

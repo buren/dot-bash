@@ -108,13 +108,15 @@ function print_non_usascii {
 ## __TERMINAL__ ##
 
 function terminal-dark  {
-  if [ ! -d ~/.buren/terminal-themes/gnome-terminal-colors-solarized ]; then
+  if [[ ! -d ~/.buren/terminal-themes/gnome-terminal-colors-solarized ]]; then
+    echo "Terminal themes not installed"
     __dot-bash-install-solarized-terminal-colors
   fi
   sh ~/.buren/terminal-themes/gnome-terminal-colors-solarized/set_dark.sh
 }
 function terminal-light  {
-  if [ ! -d ~/.buren/terminal-themes/gnome-terminal-colors-solarized ]; then
+  if [[ ! -d ~/.buren/terminal-themes/gnome-terminal-colors-solarized ]]; then
+    echo "Terminal themes not installed"
     __dot-bash-install-solarized-terminal-colors
   fi
   sh ~/.buren/terminal-themes/gnome-terminal-colors-solarized/set_light.sh
