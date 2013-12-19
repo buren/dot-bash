@@ -25,6 +25,18 @@ please(){
     fi
 }
 
+# Redo the last command arguments with specified program
+# example:
+#                 $ ls some_file
+#                 $ redo_with cat
+function redo_with() {
+  $1 $(history -p '!*')
+}
+
+function popular_commands {
+  cut -f1 -d" " ~/  .bash_history | sort | uniq -c | sort -nr | head -12
+}
+
 # Extract a lot of different archieve formats
 extract () {
     if [ -f $1 ] ; then
