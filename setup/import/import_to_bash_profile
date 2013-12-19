@@ -1,0 +1,3 @@
+if [ -f ~/.buren/dot-bash/setup/import/import.sh ]; then
+  source ~/.buren/dot-bash/setup/import/import.sh
+fi
