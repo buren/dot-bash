@@ -135,15 +135,6 @@ function servelocalhost {
   ~/.buren/bin/ngrok $1
 }
 
-alias chat_server='echo "Starting chat server on" && localip && echo "on port 1567" && echo "Client should run nc "localip"  1567" && nc -l 1567'
-
-# Simple chat server
-function simple_chat {
-  echo "On the other computer type:"
-  echo nc $(hostname -I) 55555
-  nc -l 55555
-}
-
 # Simple HTTPS server, serving current directory
 function servethis {
   if [ ! -z "$1" ]; then
@@ -152,6 +143,22 @@ function servethis {
   python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'
 }
 
+
+alias chat_server='echo "Starting chat server on" && localip && echo "on port 1567" && echo "Client should run nc "localip"  1567" && nc -l 1567'
+
+# Simple chat server
+function chat_init {
+  if [[ -z "$1" ]]; then
+    echo "Initalizing chat server"
+    echo "On the other computer type:"
+    echo nc $(hostname -I) 55555
+    nc -l 55555
+  else
+      echo "Initalizing chat client"
+      echo "Listening on ${2-55555}"
+      nc $1 ${2-55555}
+  fi
+}
 
 # Show active network listeners
 alias netlisteners='netstat -untap'
@@ -238,7 +245,7 @@ alias hmigrate='heroku run rake db:migrate && heroku restart'
 
 function download {
   if [ -f ~/.buren/util_scripts/downloader.thor ]; then
-    rvm use 2.0.0 && ~/.buren/util_scripts/downloader.thor fetch "$@"
+    ~/.buren/util_scripts/downloader.thor fetch "$@"
   else
     echo "Cannot find ~/.buren/util_scripts/downloader.thor"
   fi

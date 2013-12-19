@@ -1,7 +1,10 @@
-echo "Installing Dot bash OSX"
-cd ~/.buren/dot-bash-temp && __osx-install
+echo "Installing for OSX"
+$current_folder=$(pwd)
+mkdir ~/.buren/dot-bash-temp
+cd ~/.buren/dot-bash-temp && __osx_install
+cd $current_folder
 
-function __osx-install {
+function __osx_install {
   __install-homebrew-with-plugins
   __install-common-cli-programs
   __install-nmap
