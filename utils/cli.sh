@@ -1,7 +1,7 @@
 alias resource="source ~/.bash_profile"
 
 function buren {
-  if   [ -z "$1" ]; then
+  if  [[ -z "$1" ]]; then
     __buren-help
   else
     __buren_functions "$@"
@@ -9,10 +9,10 @@ function buren {
 }
 
 function __buren_functions {
-  if   [ $1 == "self-destruct" ]; then
+  if   [[ "$1" == "self-destruct" ]]; then
     __b_self_destruct
-  elif [ $1 == "update" ]; then
-    __b_update "$1"
+  elif [[ "$1" == "update" ]]; then
+    __b_update "$2"
   else
     echo "Unknown command '$1'"
     __buren-help
@@ -25,7 +25,7 @@ function __buren_functions {
 ###############
 
 function __b_self_destruct {
-  if [ $1 == "--help" ] || [ $1 == "-help "]; then
+  if [ "$1" == "--help" ] || [ "$1" == "-help "]; then
     echo "usage:"
     echo -e "\t buren self-destruct"
     echo "removes the script entirely (~/.buren)"
@@ -47,18 +47,18 @@ function __b_self_destruct_execute {
 
 # dot-bash import
 function __b_update {
-  if   [ $1 == "--help" ] || [ $1 == "-help" ]; then
+  if   [ "$1" == "--help" ] || [ "$1" == "-help" ]; then
     echo "usage:"
     echo -e "\t buren update <pkg>"
     echo "no argument will update all packages"
     echo "available packages: git-story, dot-bash, util-scripts"
   else
     local CURRENT_FOLDER=$(pwd)
-    if [ $1 == "git-story" ]; then
+    if [ "$1" == "git-story" ]; then
       __b_update_git_story
-    elif [ $1 == "util-scripts" ]; then
+    elif [ "$1" == "util-scripts" ]; then
       __b_update_util_scripts
-    elif [ $1 == "dot-bash" ];then
+    elif [ "$1" == "dot-bash" ];then
       __b_update_dot_bash
     elif [ -z "$1" ]; then
       __b_update_dot_bash
@@ -71,12 +71,12 @@ function __b_update {
 
 function __b_update_dot_bash {
   echo "Updating dot-bash"
-  cd ~/.buren/dot-bash    && git pull origin master
+  cd ~/.buren/dot-bash && git pull origin master
 }
 
 function __b_update_git_story {
   echo "Updating git-story"
-  cd ~/.buren/git-story     && git pull origin master
+  cd ~/.buren/git-story && git pull origin master
 }
 
 function __b_update_util_scripts {
