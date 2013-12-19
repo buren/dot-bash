@@ -25,7 +25,7 @@ function __buren_functions {
 ###############
 
 function __b_self_destruct {
-  if [ "$1" == "--help" ] || [ "$1" == "-help "]; then
+  if [[ "$1" == "--help" || "$1" == "-help " ]]; then
     echo "usage:"
     echo -e "\t buren self-destruct"
     echo "removes the script entirely (~/.buren)"
@@ -47,7 +47,7 @@ function __b_self_destruct_execute {
 
 # dot-bash import
 function __b_update {
-  if   [ "$1" == "--help" ] || [ "$1" == "-help" ]; then
+  if   [[ "$1" == "--help" || "$1" == "-help" ]]; then
     echo "usage:"
     echo -e "\t buren update <pkg>"
     echo "no argument will update all packages"
