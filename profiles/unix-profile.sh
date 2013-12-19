@@ -1,22 +1,6 @@
 ## __DOT_BASH__ ##
 source ~/.buren/dot-bash/setup/profile-install/unix-profile-install.sh # Install functions
 
-alias resource="source ~/.bash_profile"
-
-# dot-bash import
-function update_dot_bash {
-  local CURRENT_FOLDER=$(pwd)
-  echo "Updating dot-bash"
-  cd ~/.buren/dot-bash    && git pull origin master
-  echo "Updating git-story"
-  cd ~/.buren/git-story     && git pull origin master
-  echo "Updating util_scripts"
-  cd ~/.buren/util_scripts && git pull origin master
-  cd $CURRENT_FOLDER
-}
-
-
-
 ## __UNIX__ ##
 
 alias rsync='rsync --progress'

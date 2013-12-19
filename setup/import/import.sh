@@ -1,4 +1,5 @@
 source ~/.buren/dot-bash/profiles/unix-profile.sh
+source ~/.buren/dot-bash/utils/cli.sh
 
 if [ -f ~/.buren/git-story/src/git_story.sh ]; then
   source ~/.buren/git-story/src/git_story.sh
