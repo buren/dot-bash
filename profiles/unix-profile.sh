@@ -1,5 +1,5 @@
 ## __DOT_BASH__ ##
-source ~/.buren/dot-bash/profile-install/install-unix.sh # Install functions
+source ~/.buren/dot-bash/setup/profile-install/install-unix.sh # Install functions
 
 alias resource="source ~/.bash_profile"
 
