@@ -1,7 +1,7 @@
 echo "Installing Dot bash Linux"
-cd ~/.buren/dot-bash-temp && __dot-bash-linux-install
+cd ~/.buren/dot-bash-temp && __linux-install
 
-function __dot-bash-linux-install {
+function __linux-install {
   echo "Installing dot-bash Linux dependencies"
   __install-nmap
 }

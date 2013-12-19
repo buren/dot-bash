@@ -16,12 +16,14 @@ function __dot-bash-install-ngrok {
   fi
 
   unzip ngrok.zip
+
+  mkdir ~/.buren/bin
   mv ngrok ~/.buren/bin
   echo "Ngrok downloaded and installed in ~/.buren/bin"
 }
 
 
 # Terminal colors
-function __install-solarized-terminal-colors {
+function __dot-bash-install-solarized-terminal-colors {
   mkdir ~/.buren/terminal-themes && ~/.buren/terminal-themes && git clone https://github.com/sigurdga/gnome-terminal-colors-solarized.git
 }

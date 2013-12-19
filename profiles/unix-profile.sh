@@ -1,15 +1,18 @@
 ## __DOT_BASH__ ##
+source ~/.buren/dot-bash/profile-install/install-unix.sh # Install functions
 
 alias resource="source ~/.bash_profile"
 
 # dot-bash import
 function update_dot_bash {
+  local CURRENT_FOLDER=$(pwd)
   echo "Updating dot-bash"
   cd ~/.buren/dot-bash    && git pull origin master
   echo "Updating git-story"
   cd ~/.buren/git-story     && git pull origin master
   echo "Updating util_scripts"
   cd ~/.buren/util_scripts && git pull origin master
+  cd $CURRENT_FOLDER
 }
 
 
@@ -122,13 +125,13 @@ function print_non_usascii {
 
 function terminal-dark  {
   if [ ! -d ~/.buren/terminal-themes/gnome-terminal-colors-solarized ]; then
-    __install-solarized-terminal-colors
+    __dot-bash-install-solarized-terminal-colors
   fi
   sh ~/.buren/terminal-themes/gnome-terminal-colors-solarized/set_dark.sh
 }
 function terminal-light  {
   if [ ! -d ~/.buren/terminal-themes/gnome-terminal-colors-solarized ]; then
-    __install-solarized-terminal-colors
+    __dot-bash-install-solarized-terminal-colors
   fi
   sh ~/.buren/terminal-themes/gnome-terminal-colors-solarized/set_light.sh
 }

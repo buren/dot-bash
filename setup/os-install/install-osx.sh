@@ -1,7 +1,7 @@
 echo "Installing Dot bash OSX"
-cd ~/.buren/dot-bash-temp && __dot-bash-osx-install
+cd ~/.buren/dot-bash-temp && __osx-install
 
-function __dot-bash-osx-install {
+function __osx-install {
   __install-homebrew-with-plugins
   __install-common-cli-programs
   __install-nmap
