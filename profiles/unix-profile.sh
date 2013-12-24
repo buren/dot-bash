@@ -3,12 +3,23 @@ source ~/.buren/dot-bash/setup/profile-install/unix-profile-install.sh # Install
 
 ## __UNIX__ ##
 
+alias resource="source ~/.bash_profile"
+
+# Reload the shell (i.e. invoke as a login shell)
+alias reload="exec $SHELL -l"
+
+# Intuitive map function
+# For example, to list all directories that contain a certain file:
+# find . -name .gitattributes | map dirname
+alias map="xargs -n1"
+
 alias rsync='rsync --progress'
 
 # Counts the number of files in folder
 function count_files {
   ls $1 | wc -l
 }
+
 alias lc='count_files' # short hand for the above function
 
 alias hs='history | grep --color=auto'
@@ -122,9 +133,22 @@ function terminal-light  {
   sh ~/.buren/terminal-themes/gnome-terminal-colors-solarized/set_light.sh
 }
 
-
-
 ## __NETWORKING__ ##
+
+# Create a data URL from a file
+function dataurl() {
+  local mimeType=$(file -b --mime-type "$1")
+  if [[ $mimeType == text/* ]]; then
+          mimeType="${mimeType};charset=utf-8"
+  fi
+  echo "data:${mimeType};base64,$(openssl base64 -in "$1" | tr -d '\n')"
+}
+
+# URL-encode strings
+alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
+
+# Enhanced WHOIS lookups
+alias whois="whois -h whois-servers.net"
 
 # Makes localhost accessible through a tunnel
 function servelocalhost {
@@ -142,7 +166,6 @@ function servethis {
   fi
   python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'
 }
-
 
 alias chat_server='echo "Starting chat server on" && localip && echo "on port 1567" && echo "Client should run nc "localip"  1567" && nc -l 1567'
 
@@ -175,7 +198,7 @@ alias scan_network='sudo nmap -sn -PE 192.168.0.0/24'
 
 alias scan_secret='sudo nmap -sV -vv -PN 192.168.0.0/24'
 
-alias scan_network_deep='sudo nmap -sC --script=smb-check-vulns --script-args=safe=1 -p445  -d -PN -n -T4  --min-hostgroup 256 --min-parallelism 64  -oA conficker_scan -O --osscan-guess 192.168.0.0/24'
+alias scan_network_deep='sudo nmap -sC --script=smb-check-vulns --script-args=safe=1 --script-args=unsafe=1 -p445  -d -PN -n -T4  --min-hostgroup 256 --min-parallelism 64  -oA conficker_scan -O --osscan-guess 192.168.0.0/24'
 
 alias scan_ssh='nmap -p 22 --open -sV 192.168.0.0/24'
 

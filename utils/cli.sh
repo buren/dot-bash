@@ -1,5 +1,3 @@
-alias resource="source ~/.bash_profile"
-
 function buren {
   if  [[ -z "$1" ]]; then
     __buren-help
@@ -14,7 +12,7 @@ function __buren_functions {
   elif [[ "$1" == "update" ]]; then
     __b_update "$2"
   elif [[ "$1" == "setup" ]]; then
-  __b_setup "$2"
+    __b_setup "$2"
   else
     echo "Unknown command '$1'"
     __buren-help
@@ -30,7 +28,7 @@ function __b_self_destruct {
   if [[ "$1" == "--help" || "$1" == "-help " ]]; then
     echo "usage:"
     echo -e "\t buren self-destruct"
-    echo "removes the script entirely (~/.buren)"
+    echo "removes the script entirely (rm -rf ~/.buren)"
   else
     while true; do
       read -p "Are you sure? (y\n)" yn
@@ -47,7 +45,6 @@ function __b_self_destruct_execute {
   rm -rf ~/.buren
 }
 
-# dot-bash import
 function __b_update {
   if   [[ "$1" == "--help" || "$1" == "-help" ]]; then
     echo "usage:"
@@ -87,8 +84,21 @@ function __b_update_util_scripts {
 }
 
 function __b_setup {
-   if [ "$1" == "os" ]; then
+  if [[ "$1" == "--help" || "$1" == "-help" ]]; then
+    echo "usage:"
+    echo -e "\t buren setup <arg>"
+    echo "available args: os, defaults"
+    echo ""
+    echo "Command explaination:"
+    echo -e "\t os            Installs packages for current platform"
+    echo -e "\t defaults      Sets default values (startup options etc) for current platform"
+  elif [ "$1" == "os" ]; then
     __b_setup_os
+  elif [[ $1 == "defaults" ]]; then
+    __b_setup_defaults
+  else
+    echo "Unknown option '$1'"
+    __b_setup --help
   fi
 }
 
@@ -97,6 +107,15 @@ function __b_setup_os {
     sh ~/.buren/setup/os-install/install-osx.sh
   elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
     sh ~/.buren/setup/os-install/install-linux.sh
+  fi
+}
+
+function __b_setup_defaults {
+  if [[ "$(uname)" == "Darwin" ]]; then
+    echo "Setting up defaults for OSX"
+    __setup_osx_defaults
+  elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
+    echo "No defaults configured on Linux"
   fi
 }
 

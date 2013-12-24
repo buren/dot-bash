@@ -1,4 +1,5 @@
 source ~/.buren/dot-bash/profiles/unix-profile.sh
+source ~/.buren/dot-bash/profiles/bash-prompt.sh
 source ~/.buren/dot-bash/utils/cli.sh
 
 if [ -f ~/.buren/git-story/src/git_story.sh ]; then
@@ -16,5 +17,3 @@ if [ "$(uname)" == "Darwin" ]; then
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     source ~/.buren/dot-bash/profiles/linux-profile.sh
 fi
-
-source ~/.buren/dot-bash/setup/profile-install/unix-profile-install.sh
