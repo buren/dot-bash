@@ -5,11 +5,11 @@ source ~/.buren/dot-bash/utils/cli.sh
 if [ -f ~/.buren/git-story/src/git_story.sh ]; then
   source ~/.buren/git-story/src/git_story.sh
 else
-  cd ~/.buren && git clone git@github.com:buren/git-story.git && source ~/.buren/git-story/src/git_story.sh
+  cd ~/.buren && git clone https://github.com/buren/git-story.git && source ~/.buren/git-story/src/git_story.sh
 fi
 
 if [ ! -d ~/.buren/util_scripts/ ]; then
-  cd ~/.buren && git clone git@github.com:buren/util_scripts.git
+  cd ~/.buren && git clone https://github.com/buren/util_scripts.git
 fi
 
 if [ "$(uname)" == "Darwin" ]; then
