@@ -32,9 +32,10 @@ alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resource
 
 function sleepin {
   if [[ -z "$1" ]]; then
-    sleep $(bc <<< $1*60); pmset sleepnow
-  else
     pmset sleepnow
+  else
+    echo "Sleeping in $(bc <<< $1*60) minutes"
+    sleep $(bc <<< $1*60) && pmset sleepnow
   fi
 }
 

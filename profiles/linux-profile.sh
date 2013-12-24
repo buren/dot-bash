@@ -6,7 +6,12 @@
 #      <username> ALL = NOPASSWD: /usr/sbin/pm-suspend
 # Suspend computer after N-min (Linux specific)
 function sleepin {
-  sleep $(bc <<< $1*60); sudo pm-suspend
+  if [[ -z "$1" ]]; then
+    pmset sleepnow
+  else
+    echo "Sleeping in $(bc <<< $1*60) minutes"
+    sleep $(bc <<< $1*60) && sudo pm-suspend
+  fi
 }
 
 alias install='sudo apt-get install'
