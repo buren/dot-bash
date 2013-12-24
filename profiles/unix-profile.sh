@@ -8,11 +8,6 @@ alias resource="source ~/.bash_profile"
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec $SHELL -l"
 
-# Intuitive map function
-# For example, to list all directories that contain a certain file:
-# find . -name .gitattributes | map dirname
-alias map="xargs -n1"
-
 alias rsync='rsync --progress'
 
 # Counts the number of files in folder
