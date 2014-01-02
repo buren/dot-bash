@@ -15,7 +15,7 @@ alias localip='ipconfig getifaddr en0'
 
 # Overide 'marks' function in .unix-profile (to work consistently across osx/linux)
 function marks {
-    \ls -l "$MARKPATH" | tail -n +2 | sed 's/  / /g' | cut -d' ' -f9- | awk -F ' -> ' '{printf "%-10s -> %s\n", $1, $2}'
+  \ls -l "$MARKPATH" | tail -n +2 | sed 's/  / /g' | cut -d' ' -f9- | awk -F ' -> ' '{printf "%-10s -> %s\n", $1, $2}'
 }
 
 # Flush Directory Service cache
@@ -34,7 +34,7 @@ function sleepin {
   if [[ -z "$1" ]]; then
     pmset sleepnow
   else
-    echo "Sleeping in $(bc <<< $1*60) minutes"
+    echo "Sleeping in $1 minutes"
     sleep $(bc <<< $1*60) && pmset sleepnow
   fi
 }
