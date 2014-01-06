@@ -242,9 +242,13 @@ function gcommit {
 }
 
 function gpush {
-  git add .
-  git commit -m "$2"
-  git push origin $1
+  if [ ! -z "$2" ]; then
+    git push origin $1
+  else
+    git add .
+    git commit -m "$2"
+    git push origin $1
+  fi
 }
 
 function gitfuckit {
