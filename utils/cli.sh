@@ -13,6 +13,8 @@ function __buren_functions {
     __b_update "$2"
   elif [[ "$1" == "setup" ]]; then
     __b_setup "$2"
+  elif [[ "$1" == "edit" ]]; then
+    __b_edit "$2"
   else
     echo "Unknown command '$1'"
     __buren-help
@@ -81,6 +83,32 @@ function __b_update_git_story {
 function __b_update_util_scripts {
     echo "Updating util_scripts"
     cd ~/.buren/util_scripts && git pull origin master
+}
+
+function __b_edit {
+  if [[ "$1" == "--help" || "$1" == "-help" ]]; then
+    echo "Usage:"
+    echo -e "\t buren edit <package>"
+    echo "Available packages:"
+    echo -e "\t dot-bash (alias: bash), git-story (alias: git), util_scripts (alias: scripts)"
+    echo "Default:  dot-bash"
+  else
+    if  [[ -z "$1" ]]; then
+      $(subl ~/.buren/dot-bash)
+    else
+      if [[ "$1" == "dot-bash" ]] || [ "$1" == "bash" ]; then
+        $(subl ~/.buren/dot-bash)
+      elif [[ $1 == "git-story" ]] || [[ $1 == "git" ]]; then
+        $(subl ~/.buren/git-story)
+      elif [[ $1 == "util_scripts" ]] || [[ $1 == "scripts" ]]; then
+        $(subl ~/.buren/util_scripts)
+      else
+        echo "Unkown package: $1"
+        echo "Available packages:"
+        echo -e "\t dot-bash (alias: bash), git-story (alias: git), util_scripts (alias: scripts)"
+      fi
+    fi
+  fi
 }
 
 function __b_setup {

@@ -27,29 +27,37 @@ alias tree='tree -C $* | less -R'
 alias tm='ps -ef | grep --color=auto'
 
 # Do sudo to a command, or do sudo to the last typed command if no argument given
-please(){
-    if [[ $# == 0 ]]; then
-        sudo $(history -p '!!')
-    else
-        sudo "$@"
-    fi
+function please {
+  if [[ $# == 0 ]]; then
+    sudo $(history -p '!!')
+  else
+    sudo "$@"
+  fi
 }
 
-# Redo the last command arguments with specified program
-# example:
-#                 $ ls some_file
-#                 $ redo_with cat
-function redo_with() {
-  $1 $(history -p '!*')
+
+function redo_with {
+  if [[ -z "$1" ]] || [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
+    echo "Usage:"
+    echo -e "\t $ redo_with <program>"
+    echo -e "Run specified program with arguements from previous command."
+    echo ""
+    echo -e "example:"
+    echo -e "\t $ ls <some_file>"
+    echo -e "\t $ redo_with <program>"
+    echo "will execute: <program> <some_file>"
+  else
+    $1 $(history -p '!*')
+  fi
 }
 
 function popular_commands {
-  cut -f1 -d" " ~/  .bash_history | sort | uniq -c | sort -nr | head -12
+  cut -f1 -d" " ~/.bash_history | sort | uniq -c | sort -nr | head -12
 }
 
 
 # Extract a lot of different archieve formats
-extract () {
+function extract {
   if [ -f $1 ] ; then
     case $1 in
       *.tar.bz2)   tar xjf $1     ;;
@@ -132,16 +140,30 @@ function terminal-light  {
 ## __NETWORKING__ ##
 
 # Create a data URL from a file
-function dataurl() {
-  local mimeType=$(file -b --mime-type "$1")
-  if [[ $mimeType == text/* ]]; then
-          mimeType="${mimeType};charset=utf-8"
+function dataurl {
+  if [[ -z "$1" ]] || [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
+    echo "Usage:"
+    echo -e "\t dataurl <path_to_file>"
+    echo "creates a data URL from specified file."
+  else
+    local mimeType=$(file -b --mime-type "$1")
+    if [[ $mimeType == text/* ]]; then
+      mimeType="${mimeType};charset=utf-8"
+    fi
+    echo "data:${mimeType};base64,$(openssl base64 -in "$1" | tr -d '\n')"
   fi
-  echo "data:${mimeType};base64,$(openssl base64 -in "$1" | tr -d '\n')"
 }
 
 # URL-encode strings
-alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
+function urlencode {
+  if [[ -z "$1" ]] || [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
+    echo "Usage:"
+    echo -e "\t urlencode <any_string>"
+    echo "URL-encodes specified string"
+  else
+    python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"
+  fi
+}
 
 # Enhanced WHOIS lookups
 alias whois="whois -h whois-servers.net"
@@ -199,6 +221,33 @@ function chat_init {
       echo "Listening on $1 on port ${2-55555}"
       nc $1 ${2-55555}
     fi
+  fi
+}
+
+function chat_client {
+  if [[ -z "$1" ]] || [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
+    echo "Usage:"
+    echo -e "\t chat_server <optional_port>"
+    echo "connects to chat server on <ip> <optional_port>"
+    echo "Default port: 55555"
+  else
+    echo "Initalizing chat client"
+    echo "Listening on $1 port ${2-55555}"
+    nc $1 ${2-55555}
+  fi
+}
+
+function chat_server {
+  if [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
+    echo "Usage:"
+    echo -e "\t chat_server <optional_port>"
+    echo "starts chat server on port <optional_port>"
+    echo "Default port: 55555"
+  else
+    echo "Initalizing chat server"
+    echo "On the other computer type:"
+    echo nc $(localip) ${1-55555}
+    nc -l ${1-55555}
   fi
 }
 
@@ -306,6 +355,7 @@ function gpush {
 function gitfuckit {
   gpush ${1-master} "update"
 }
+
 
 
 ## __HEROKU__ ##
