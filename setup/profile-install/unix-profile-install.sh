@@ -7,6 +7,7 @@ function __dot-bash-install-ngrok {
   echo "Downloading Ngrok"
 
   current_folder=$(pwd)
+  mkdir ~/.buren/dot-bash-temp
   cd ~/.buren/dot-bash-temp
 
   if [ "$(uname)" == "Darwin" ]; then
