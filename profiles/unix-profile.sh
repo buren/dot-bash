@@ -151,33 +151,57 @@ function servelocalhost {
   if [ ! -f ~/.buren/bin/ngrok ];then
     echo "Ngrok not found in ~/.buren/bin/ngrok."
     __dot-bash-install-ngrok
+    echo "Installation finished."
   fi
-  ~/.buren/bin/ngrok $1
+
+  if [[ ! -z "$1" ]] || [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
+    echo "Usage:"
+    echo -e "\t servelocalhost <port>"
+    echo "serve localhost on port"
+  else
+    echo "Starting ngrok"
+    ~/.buren/bin/ngrok $1 # $1 port
+  fi
 }
 
 # Simple HTTPS server, serving current directory
 function servethis {
-  if [ ! -z "$1" ]; then
-    cd $1
+  if [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
+    echo "Usage:"
+    echo -e "\t servethis <optional_directory>"
+    echo "serve the current/specified directory"
+  else
+    if [ ! -z "$1" ]; then
+      cd $1
+    fi
+    python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'
   fi
-  python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'
 }
 
-alias chat_server='echo "Starting chat server on" && localip && echo "on port 1567" && echo "Client should run nc "localip"  1567" && nc -l 1567'
 
 # Simple chat server
 function chat_init {
-  if [[ -z "$1" ]]; then
-    echo "Initalizing chat server"
-    echo "On the other computer type:"
-    echo nc $(hostname -I) 55555
-    nc -l 55555
+  if [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
+    echo "Usage:"
+    echo -e "\t chat_init"
+    echo "starts chat client on port 55555"
+    echo ""
+    echo -e "\t chat_init <ip> <optional_port>"
+    echo "connects to chat server on port"
   else
+    if [[ -z "$1" ]]; then
+      echo "Initalizing chat server"
+      echo "On the other computer type:"
+      echo nc $(localip) 55555
+      nc -l 55555
+    else
       echo "Initalizing chat client"
-      echo "Listening on ${2-55555}"
+      echo "Listening on $1 on port ${2-55555}"
       nc $1 ${2-55555}
+    fi
   fi
 }
+
 
 # Show active network listeners
 alias netlisteners='netstat -untap'
@@ -185,14 +209,40 @@ alias checkconnection="ping www.google.com"
 
 # Get external IP
 alias myip='curl ip.appspot.com'
+alias externalip='myip'
 
 # Quick look online hosts
 # alias whoisup='fping -c1 -gds 192.168.1.0/24 2>&1| egrep -v "ICMP|xmt"'
 
-# Deep nmap scan for online hosts
-alias scan_network='sudo nmap -sn -PE 192.168.0.0/24'
+function scan_network {
+  if [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
+    echo "Usage:"
+    echo -e "\t scan_network <optional_scan_range>"
+    echo "scans network for online hosts"
+    echo "Default range: 192.168.0.0/24"
+  else
+    if [[ -z "$1" ]]; then
+      sudo nmap -sV -vv -PN 192.168.0.0/24
+    else
+      sudo nmap -sV -vv -PN $1
+    fi
+  fi
+}
 
-alias scan_secret='sudo nmap -sV -vv -PN 192.168.0.0/24'
+function scan_secret {
+  if [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
+    echo "Usage:"
+    echo -e "\t scan_secret <optional_scan_range>"
+    echo "scans network for online hosts and open ports. (verbose)"
+    echo "Default range: 192.168.0.0/24"
+  else
+    if [[ -z "$1" ]]; then
+      sudo nmap -sn -PE 192.168.0.0/24
+    else
+      sudo nmap -sn -PE $1
+    fi
+  fi
+}
 
 alias scan_network_deep='sudo nmap -sC --script=smb-check-vulns --script-args=safe=1 --script-args=unsafe=1 -p445  -d -PN -n -T4  --min-hostgroup 256 --min-parallelism 64  -oA conficker_scan -O --osscan-guess 192.168.0.0/24'
 
@@ -235,6 +285,8 @@ alias gdiff='git diff --color'
 alias gshow='git show  --color'
 alias glog='git log --graph --full-history --all --color'
 alias gadd='git add .'
+alias gcheck='git checkout'
+alias gbranch='git branch'
 
 function gcommit {
   git add .
