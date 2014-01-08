@@ -176,7 +176,7 @@ function servelocalhost {
     echo "Installation finished."
   fi
 
-  if [[ ! -z "$1" ]] || [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
+  if [[ -z "$1" ]] || [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
     echo "Usage:"
     echo -e "\t servelocalhost <port>"
     echo "serve localhost on port"
