@@ -66,6 +66,7 @@ function __b_update {
       __b_update_util_scripts
       __b_update_git_story
     fi
+    source ~/.bash_profile
     cd $CURRENT_FOLDER
   fi
 }
