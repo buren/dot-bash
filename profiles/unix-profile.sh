@@ -202,28 +202,6 @@ function servethis {
 
 
 # Simple chat server
-function chat_init {
-  if [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
-    echo "Usage:"
-    echo -e "\t chat_init"
-    echo "starts chat client on port 55555"
-    echo ""
-    echo -e "\t chat_init <ip> <optional_port>"
-    echo "connects to chat server on port"
-  else
-    if [[ -z "$1" ]]; then
-      echo "Initalizing chat server"
-      echo "On the other computer type:"
-      echo nc $(localip) 55555
-      nc -l 55555
-    else
-      echo "Initalizing chat client"
-      echo "Listening on $1 on port ${2-55555}"
-      nc $1 ${2-55555}
-    fi
-  fi
-}
-
 function chat_client {
   if [[ -z "$1" ]] || [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
     echo "Usage:"
