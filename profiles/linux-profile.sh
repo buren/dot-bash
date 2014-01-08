@@ -24,6 +24,9 @@ function open {
   xdg-open $1
 }
 
+# Quick look online hosts
+alias whoisup='fping -c1 -gds 192.168.1.0/24 2>&1| egrep -v "ICMP|xmt"'
+
 google_say() { local IFS=+;/usr/bin/mplayer -ao alsa -really-quiet -noconsolecontrols "http://translate.google.com/translate_tts?tl=en&q=$*"; }
 
 alias ls='ls --color=auto'

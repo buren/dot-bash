@@ -27,6 +27,13 @@ function __dot-bash-install-ngrok {
   cd $current_folder
 }
 
+function __dot-bash-util-scripts-install {
+  echo "Downloading util scripts"
+  current_folder=$(pwd)
+  cd ~/.buren && git clone https://github.com/buren/util_scripts.git
+  cd $current_folder
+}
+
 
 # Terminal colors
 function __dot-bash-install-solarized-terminal-colors {

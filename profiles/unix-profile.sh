@@ -200,7 +200,6 @@ function servethis {
   fi
 }
 
-
 # Simple chat server
 function chat_client {
   if [[ -z "$1" ]] || [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
@@ -238,8 +237,6 @@ alias checkconnection="ping www.google.com"
 alias myip='curl ip.appspot.com'
 alias externalip='myip'
 
-# Quick look online hosts
-# alias whoisup='fping -c1 -gds 192.168.1.0/24 2>&1| egrep -v "ICMP|xmt"'
 
 function scan_network {
   if [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
@@ -347,10 +344,18 @@ alias hmigrate='heroku run rake db:migrate && heroku restart'
 ## __UTILITY SCRIPTS__ ##
 
 function download {
-  if [ -f ~/.buren/util_scripts/downloader.thor ]; then
-    ~/.buren/util_scripts/downloader.thor fetch "$@"
+  if [[ -z "$1" ]] || [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
+    echo "Usage:"
+    echo -e "\t download --url=<url> --types=<first> <second> --selector=<html_selector>"
+    echo "Required options: --url"
+    echo "Optional options: --types=<first> <second> --selector=<html_selector>"
+    echo "Example:"
+    echo -e "\t download --url=example.com --types=pdf zip java --selector=.html-class"
+  elif [ ! -d ~/.buren/util_scripts/ ]; then
+    rvm use 2.0.0 && ~/.buren/util_scripts/downloader.thor fetch "$@"
   else
     echo "Cannot find ~/.buren/util_scripts/downloader.thor"
+    __dot-bash-util-scripts-install
   fi
 }
 
