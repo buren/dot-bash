@@ -10,9 +10,16 @@ function __dot-bash-install-ngrok {
   cd ~/.buren/dot-bash-temp
 
   if [ "$(uname)" == "Darwin" ]; then
+    echo "Downloading ngrok for OSX"
     curl -O https://dl.ngrok.com/darwin_amd64/ngrok.zip
   elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    curl -O https://dl.ngrok.com/linux_386/ngrok.zip
+    if [[ "$(expr substr $(uname -m) 1 3)" == "arm" ]]; then
+      echo "Downloading ngrok for ARM proccessor"
+      curl -O https://dl.ngrok.com/linux_arm/ngrok.zip
+    else
+      echo "Downloading ngrok for i386 proccessor"
+      curl -O https://dl.ngrok.com/linux_386/ngrok.zip
+    fi
   else
     echo "Unknown platform, cant install ngrok"
     exit 0
