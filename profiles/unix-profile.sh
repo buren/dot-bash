@@ -331,6 +331,7 @@ function gitfuckit {
   gpush ${1-master} "update"
 }
 
+alias github_open="open \`git remote -v | grep git@github.com | grep fetch | head -1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/http:\/\//'\`"
 
 
 ## __HEROKU__ ##
