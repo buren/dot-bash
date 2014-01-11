@@ -318,7 +318,7 @@ function gcommit {
 }
 
 function gpush {
-  if [ ! -z "$2" ]; then
+  if [ -z "$2" ]; then
     git push origin $1
   else
     git add .

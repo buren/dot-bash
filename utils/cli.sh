@@ -78,7 +78,7 @@ function __b_update_dot_bash {
 
 function __b_update_git_story {
   echo "Updating git-story"
-  cd ~/.buren/git-story && git pull origin master
+  cd ~/.git-story && git pull origin master
 }
 
 function __b_update_util_scripts {
@@ -100,7 +100,7 @@ function __b_edit {
       if [[ "$1" == "dot-bash" ]] || [ "$1" == "bash" ]; then
         $(subl ~/.buren/dot-bash)
       elif [[ $1 == "git-story" ]] || [[ $1 == "git" ]]; then
-        $(subl ~/.buren/git-story)
+        $(subl ~/.git-story)
       elif [[ $1 == "util_scripts" ]] || [[ $1 == "scripts" ]]; then
         $(subl ~/.buren/util_scripts)
       else
