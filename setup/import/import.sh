@@ -11,7 +11,7 @@ if [[ ! -d ~/.buren/util_scripts/ ]]; then
 fi
 
 if [[ "$(uname)" == "Darwin" ]]; then
-    source ~/.buren/dot-bash/profiles/osx-profile.sh
+  source ~/.buren/dot-bash/profiles/osx-profile.sh
 elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
-    source ~/.buren/dot-bash/profiles/linux-profile.sh
+  source ~/.buren/dot-bash/profiles/linux-profile.sh
 fi
