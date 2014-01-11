@@ -1,10 +1,3 @@
-mkdir ~/.buren
-CURRENT_FOLDER=$(pwd) && \
-cd ~/.buren && \
-git clone https://github.com/buren/dot-bash.git && \
-__dot-bash-inject-to-profile && \
-cd $CURRENT_FOLDER
-
 function __dot-bash-inject-to-profile {
   if [[ -f ~/.bash_profile ]]; then
     echo "Injecting import: bash_profile"
@@ -24,3 +17,10 @@ function __dot-bash-inject-to-profile {
   fi
   source ~/.buren/dot-bash/setup/import/import_to_bash_profile
 }
+
+mkdir ~/.buren
+CURRENT_FOLDER=$(pwd) && \
+cd ~/.buren && \
+git clone https://github.com/buren/dot-bash.git && \
+__dot-bash-inject-to-profile && \
+cd $CURRENT_FOLDER
