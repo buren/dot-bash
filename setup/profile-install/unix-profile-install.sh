@@ -56,7 +56,7 @@ function __dot-bash-install-solarized-terminal-colors {
 function __dot-bash-install-lein-clojure {
   echo "Downloading lein clojure script"
   sudo wget -O /bin/lein https://raw.github.com/technomancy/leiningen/stable/bin/lein
-  sudo chmod +x /bin/lein
+  sudo chmod a+x /bin/lein
   lein "$@"
   echo "Installed lein clojure script"
 }
