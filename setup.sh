@@ -16,7 +16,7 @@ function __dot-bash-inject-to-profile {
     echo "However the script has been loaded and will be available in the current shell session."
     echo ""
     echo -e "To install add the below line to your bash profile."
-    echo -e "\t source ~/.git-story/setup/import.sh"
+    echo -e "\t cat ~/.buren/dot-bash/setup/import/import_to_bash_profile >> ~/.your_profile"
   fi
 }
 
