@@ -137,14 +137,15 @@ function terminal-light  {
   sh ~/.buren/terminal-themes/gnome-terminal-colors-solarized/set_light.sh
 }
 
-## __PROGRAMMING LANGUAGES__ ##
+## __PROGRAMMING__ ##
+
 function lein {
-  if [[ ! -f ~/bin/lein ]]; then
+  if [[ ! -f /bin/lein ]]; then
     echo "Lein clojure not installed"
     echo "Installing..."
     __dot-bash-install-lein-clojure
   fi
-  lein "$@"
+  /bin/lein "$@"
 }
 
 ## __NETWORKING__ ##
