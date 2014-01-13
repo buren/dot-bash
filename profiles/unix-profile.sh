@@ -11,7 +11,7 @@ alias reload="exec $SHELL -l"
 alias rsync='rsync --progress'
 
 # Counts the number of files in folder
-function count_files {
+count_files() {
   ls $1 | wc -l
 }
 
@@ -27,7 +27,7 @@ alias tree='tree -C $* | less -R'
 alias tm='ps -ef | grep --color=auto'
 
 # Do sudo to a command, or do sudo to the last typed command if no argument given
-function please {
+please() {
   if [[ $# == 0 ]]; then
     sudo $(history -p '!!')
   else
@@ -36,7 +36,7 @@ function please {
 }
 
 
-function redo_with {
+redo_with() {
   if [[ -z "$1" ]] || [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
     echo "Usage:"
     echo -e "\t $ redo_with <program>"
@@ -51,13 +51,13 @@ function redo_with {
   fi
 }
 
-function popular_commands {
+popular_commands() {
   cut -f1 -d" " ~/.bash_history | sort | uniq -c | sort -nr | head -12
 }
 
 
 # Extract a lot of different archieve formats
-function extract {
+extract() {
   if [ -f $1 ] ; then
     case $1 in
       *.tar.bz2)   tar xjf $1     ;;
@@ -97,16 +97,16 @@ alias ......='cd ../../../../../'
 # Source:
 #         http://jeroenjanssens.com/2013/08/16/quickly-navigate-your-filesystem-from-the-command-line.html
 export MARKPATH=$HOME/.marks
-function jump {
+jump() {
   cd -P "$MARKPATH/$1" 2>/dev/null || echo "No such mark: $1"
 }
-function mark {
+mark() {
   mkdir -p "$MARKPATH"; ln -s "$(pwd)" "$MARKPATH/$1"
 }
-function unmark {
+unmark() {
   rm -i "$MARKPATH/$1"
 }
-function marks {
+marks() {
   ls -l "$MARKPATH" | sed 's/  / /g' | cut -d' ' -f9- | sed 's/ -/\t-/g' && echo
 }
 alias j="jump"
@@ -115,21 +115,21 @@ alias j="jump"
 # Highlights and prints the lines numbers of all non US ASCII characters
 # Usage:
 #       $ print_non_usascii path/to/file
-function print_non_usascii {
+print_non_usascii() {
   pcregrep --color='auto' -n "[\x80-\xFF]"
 }
 
 
 ## __TERMINAL__ ##
 
-function terminal-dark  {
+terminal()-dark  {
   if [[ ! -d ~/.buren/terminal-themes/gnome-terminal-colors-solarized ]]; then
     echo "Terminal themes not installed"
     __dot-bash-install-solarized-terminal-colors
   fi
   sh ~/.buren/terminal-themes/gnome-terminal-colors-solarized/set_dark.sh
 }
-function terminal-light  {
+terminal()-light  {
   if [[ ! -d ~/.buren/terminal-themes/gnome-terminal-colors-solarized ]]; then
     echo "Terminal themes not installed"
     __dot-bash-install-solarized-terminal-colors
@@ -139,7 +139,7 @@ function terminal-light  {
 
 ## __PROGRAMMING__ ##
 
-function lein {
+lein() {
   if [[ ! -f /bin/lein ]]; then
     echo "Lein clojure not installed"
     echo "Installing..."
@@ -151,7 +151,7 @@ function lein {
 ## __NETWORKING__ ##
 
 # Create a data URL from a file
-function dataurl {
+dataurl() {
   if [[ -z "$1" ]] || [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
     echo "Usage:"
     echo -e "\t dataurl <path_to_file>"
@@ -166,7 +166,7 @@ function dataurl {
 }
 
 # URL-encode strings
-function urlencode {
+urlencode() {
   if [[ -z "$1" ]] || [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
     echo "Usage:"
     echo -e "\t urlencode <any_string>"
@@ -180,7 +180,7 @@ function urlencode {
 alias whois="whois -h whois-servers.net"
 
 # Makes localhost accessible through a tunnel
-function servelocalhost {
+servelocalhost() {
   if [ ! -f ~/.buren/bin/ngrok ];then
     echo "Ngrok not found in ~/.buren/bin/ngrok."
     __dot-bash-install-ngrok
@@ -198,7 +198,7 @@ function servelocalhost {
 }
 
 # Simple HTTPS server, serving current directory
-function servethis {
+servethis() {
   if [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
     echo "Usage:"
     echo -e "\t servethis <optional_directory>"
@@ -212,7 +212,7 @@ function servethis {
 }
 
 # Simple chat server
-function chat_client {
+chat_client() {
   if [[ -z "$1" ]] || [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
     echo "Usage:"
     echo -e "\t chat_server <optional_port>"
@@ -225,7 +225,7 @@ function chat_client {
   fi
 }
 
-function chat_server {
+chat_server() {
   if [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
     echo "Usage:"
     echo -e "\t chat_server <optional_port>"
@@ -249,7 +249,7 @@ alias myip='curl ip.appspot.com'
 alias externalip='myip'
 
 
-function scan_network {
+scan_network() {
   if [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
     echo "Usage:"
     echo -e "\t scan_network <optional_scan_range>"
@@ -264,7 +264,7 @@ function scan_network {
   fi
 }
 
-function scan_secret {
+scan_secret() {
   if [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
     echo "Usage:"
     echo -e "\t scan_secret <optional_scan_range>"
@@ -283,7 +283,7 @@ alias scan_network_deep='sudo nmap -sC --script=smb-check-vulns --script-args=sa
 
 alias scan_ssh='nmap -p 22 --open -sV 192.168.0.0/24'
 
-function scan_firewall {
+scan_firewall() {
   ## TCP Null Scan to fool a firewall to generate a response ##
   ## Does not set any bits (TCP flag header is 0) ##
   sudo nmap -sN $1;
@@ -295,11 +295,11 @@ function scan_firewall {
   sudo nmap -sX $1;
 }
 # Scans what ports are open on given ip-address
-function scan_openports {
+scan_openports() {
   sudo nmap -sS $1
 }
 # Checks the operating system and other data for give ip-address
-function scan_os {
+scan_os() {
   sudo nmap -O --osscan-guess $1
 }
 # Logs all GET and POST requests on port 80
@@ -323,12 +323,12 @@ alias gadd='git add .'
 alias gcheck='git checkout'
 alias gbranch='git branch'
 
-function gcommit {
+gcommit() {
   git add .
   git commit -m "$1"
 }
 
-function gpush {
+gpush() {
   if [ -z "$2" ]; then
     git push origin $1
   else
@@ -338,7 +338,7 @@ function gpush {
   fi
 }
 
-function gitfuckit {
+gitfuckit() {
   gpush ${1-master} "update"
 }
 
@@ -355,7 +355,7 @@ alias hmigrate='heroku run rake db:migrate && heroku restart'
 
 ## __UTILITY SCRIPTS__ ##
 
-function download {
+download() {
   if [[ -z "$1" ]] || [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
     echo "Usage:"
     echo -e "\t download --url=<url> --types=<first> <second> --selector=<html_selector>"

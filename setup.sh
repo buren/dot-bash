@@ -1,4 +1,4 @@
-function __dot-bash-inject-to-profile {
+__dot-bash-inject-to-profile() {
   if [[ -f ~/.bash_profile ]]; then
     echo "Injecting import: bash_profile"
     cat ~/.buren/dot-bash/setup/import/import_to_bash_profile >> ~/.bash_profile
