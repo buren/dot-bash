@@ -15,6 +15,10 @@ __buren_functions() {
     __b_setup "$2"
   elif [[ "$1" == "edit" ]]; then
     __b_edit "$2"
+  elif [[ "$1" == "extend" ]]; then
+    __b_extend
+  elif [[ "$1" == "stat" ]]; then
+  __b_stat "$2" "$3"
   else
     echo "Unknown command '$1'"
     __buren-help
@@ -25,6 +29,23 @@ __buren_functions() {
 ###############
 #        FUNCTIONS        #
 ###############
+__buren-stat-help() {
+  echo "available:"
+  echo -e "'\t commands 2             prints 2 most popular commands (default: 12)"
+}
+
+__b_stat() {
+  if [[ "$1" == "commands" ]]; then
+    __b_popular_commands $2
+  else
+    echo "Unknown command '$1'"
+    __buren-stat-help
+  fi
+}
+
+__b_popular_commands() {
+  cut -f1 -d" " ~/.bash_history | sort | uniq -c | sort -nr | head -${1-12}
+}
 
 __b_self_destruct() {
   if [[ "$1" == "--help" || "$1" == "-help " ]]; then
@@ -95,14 +116,14 @@ __b_edit() {
     echo "Default:  dot-bash"
   else
     if  [[ -z "$1" ]]; then
-      $(subl ~/.buren/dot-bash)
+      $($B_EDITOR ~/.buren/dot-bash)
     else
       if [[ "$1" == "dot-bash" ]] || [ "$1" == "bash" ]; then
-        $(subl ~/.buren/dot-bash)
+        $($B_EDITOR ~/.buren/dot-bash/)
       elif [[ $1 == "git-story" ]] || [[ $1 == "git" ]]; then
-        $(subl ~/.git-story)
+        $($B_EDITOR ~/.git-story/)
       elif [[ $1 == "util_scripts" ]] || [[ $1 == "scripts" ]]; then
-        $(subl ~/.buren/util_scripts)
+        $($B_EDITOR ~/.buren/util_scripts/)
       else
         echo "Unkown package: $1"
         echo "Available packages:"
@@ -111,6 +132,16 @@ __b_edit() {
     fi
   fi
 }
+
+__b_extend() {
+  if [[ ! -z $1 ]];then
+    echo -e "extend doesn't take any arguments."
+    echo "Ignoring all arguments"
+  fi
+  cd ~/.buren/dot-bash/
+    __b_edit "dot-bash"
+}
+
 
 __b_setup() {
   if [[ "$1" == "--help" || "$1" == "-help" ]]; then

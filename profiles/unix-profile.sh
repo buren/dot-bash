@@ -51,10 +51,6 @@ redo_with() {
   fi
 }
 
-popular_commands() {
-  cut -f1 -d" " ~/.bash_history | sort | uniq -c | sort -nr | head -12
-}
-
 
 # Extract a lot of different archieve formats
 extract() {
@@ -122,14 +118,14 @@ print_non_usascii() {
 
 ## __TERMINAL__ ##
 
-terminal()-dark  {
+terminal-dark()  {
   if [[ ! -d ~/.buren/terminal-themes/gnome-terminal-colors-solarized ]]; then
     echo "Terminal themes not installed"
     __dot-bash-install-solarized-terminal-colors
   fi
   sh ~/.buren/terminal-themes/gnome-terminal-colors-solarized/set_dark.sh
 }
-terminal()-light  {
+terminal-light()  {
   if [[ ! -d ~/.buren/terminal-themes/gnome-terminal-colors-solarized ]]; then
     echo "Terminal themes not installed"
     __dot-bash-install-solarized-terminal-colors
@@ -254,10 +250,10 @@ scan_network() {
     echo "Usage:"
     echo -e "\t scan_network <optional_scan_range>"
     echo "scans network for online hosts"
-    echo "Default range: 192.168.0.0/24"
+    echo "Default range: $B_NETWORK_RANGE"
   else
     if [[ -z "$1" ]]; then
-      sudo nmap -sV -vv -PN 192.168.0.0/24
+      sudo nmap -sV -vv -PN $B_NETWORK_RANGE
     else
       sudo nmap -sV -vv -PN $1
     fi
@@ -269,19 +265,19 @@ scan_secret() {
     echo "Usage:"
     echo -e "\t scan_secret <optional_scan_range>"
     echo "scans network for online hosts and open ports. (verbose)"
-    echo "Default range: 192.168.0.0/24"
+    echo "Default range: $B_NETWORK_RANGE"
   else
     if [[ -z "$1" ]]; then
-      sudo nmap -sn -PE 192.168.0.0/24
+      sudo nmap -sn -PE $B_NETWORK_RANGE
     else
       sudo nmap -sn -PE $1
     fi
   fi
 }
 
-alias scan_network_deep='sudo nmap -sC --script=smb-check-vulns --script-args=safe=1 --script-args=unsafe=1 -p445  -d -PN -n -T4  --min-hostgroup 256 --min-parallelism 64  -oA conficker_scan -O --osscan-guess 192.168.0.0/24'
+alias scan_network_deep='sudo nmap -sC --script=smb-check-vulns --script-args=safe=1 --script-args=unsafe=1 -p445  -d -PN -n -T4  --min-hostgroup 256 --min-parallelism 64  -oA conficker_scan -O --osscan-guess $B_NETWORK_RANGE'
 
-alias scan_ssh='nmap -p 22 --open -sV 192.168.0.0/24'
+alias scan_ssh='nmap -p 22 --open -sV $B_NETWORK_RANGE'
 
 scan_firewall() {
   ## TCP Null Scan to fool a firewall to generate a response ##
@@ -324,22 +320,26 @@ alias gcheck='git checkout'
 alias gbranch='git branch'
 
 gcommit() {
-  git add .
+  git add --all
   git commit -m "$1"
 }
 
 gpush() {
-  if [ -z "$2" ]; then
+  if [ -z "$1" ]; then
+      echo "usage:"
+      echo "'\t gpush <branch> <commit_message>"
+      return
+  elif [ -z "$2" ]; then
     git push origin $1
   else
-    git add .
+    git add --all
     git commit -m "$2"
     git push origin $1
   fi
 }
 
 gitfuckit() {
-  gpush ${1-master} "update"
+  gpush ${1-master} ${2-update}
 }
 
 alias github_open="open \`git remote -v | grep git@github.com | grep fetch | head -1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/http:\/\//'\`"
