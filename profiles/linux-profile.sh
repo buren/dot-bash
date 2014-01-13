@@ -5,7 +5,7 @@
 #      <username> ALL=(ALL) ALL
 #      <username> ALL = NOPASSWD: /usr/sbin/pm-suspend
 # Suspend computer after N-min (Linux specific)
-function sleepin {
+sleepin() {
   if [[ -z "$1" ]]; then
     pmset sleepnow
   else
@@ -20,7 +20,7 @@ alias upgrade='sudo apt-get upgrade'
 
 # Mac OSX like 'open' command
 # Opens the given input with the default program associated for that type
-function open {
+open() {
   xdg-open $1
 }
 

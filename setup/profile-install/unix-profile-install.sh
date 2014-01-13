@@ -3,7 +3,7 @@
 ###############
 
 # Install Ngrok
-function __dot-bash-install-ngrok {
+__dot-bash-install-ngrok() {
   echo "Downloading Ngrok"
 
   current_folder=$(pwd)
@@ -35,7 +35,7 @@ function __dot-bash-install-ngrok {
   cd $current_folder
 }
 
-function __dot-bash-util-scripts-install {
+__dot-bash-util-scripts-install() {
   echo "Downloading util scripts"
   current_folder=$(pwd)
   cd ~/.buren && git clone https://github.com/buren/util_scripts.git
@@ -44,7 +44,7 @@ function __dot-bash-util-scripts-install {
 
 
 # Terminal colors
-function __dot-bash-install-solarized-terminal-colors {
+__dot-bash-install-solarized-terminal-colors() {
   echo "Installing terminal colors"
   mkdir ~/.buren/terminal-themes
   current_folder=$(pwd)
@@ -53,7 +53,7 @@ function __dot-bash-install-solarized-terminal-colors {
   cd $current_folder
 }
 
-function __dot-bash-install-lein-clojure {
+__dot-bash-install-lein-clojure() {
   echo "Downloading lein clojure script"
   sudo wget -O /bin/lein https://raw.github.com/technomancy/leiningen/stable/bin/lein
   sudo chmod a+x /bin/lein

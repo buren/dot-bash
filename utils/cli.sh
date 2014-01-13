@@ -1,4 +1,4 @@
-function buren {
+buren() {
   if  [[ -z "$1" ]]; then
     __buren-help
   else
@@ -6,7 +6,7 @@ function buren {
   fi
 }
 
-function __buren_functions {
+__buren_functions() {
   if   [[ "$1" == "self-destruct" ]]; then
     __b_self_destruct
   elif [[ "$1" == "update" ]]; then
@@ -26,7 +26,7 @@ function __buren_functions {
 #        FUNCTIONS        #
 ###############
 
-function __b_self_destruct {
+__b_self_destruct() {
   if [[ "$1" == "--help" || "$1" == "-help " ]]; then
     echo "usage:"
     echo -e "\t buren self-destruct"
@@ -43,11 +43,11 @@ function __b_self_destruct {
   fi
 }
 
-function __b_self_destruct_execute {
+__b_self_destruct_execute() {
   rm -rf ~/.buren
 }
 
-function __b_update {
+__b_update() {
   if   [[ "$1" == "--help" || "$1" == "-help" ]]; then
     echo "usage:"
     echo -e "\t buren update <pkg>"
@@ -71,22 +71,22 @@ function __b_update {
   fi
 }
 
-function __b_update_dot_bash {
+__b_update_dot_bash() {
   echo "Updating dot-bash"
   cd ~/.buren/dot-bash && git pull origin master
 }
 
-function __b_update_git_story {
+__b_update_git_story() {
   echo "Updating git-story"
   cd ~/.git-story && git pull origin master
 }
 
-function __b_update_util_scripts {
+__b_update_util_scripts() {
     echo "Updating util_scripts"
     cd ~/.buren/util_scripts && git pull origin master
 }
 
-function __b_edit {
+__b_edit() {
   if [[ "$1" == "--help" || "$1" == "-help" ]]; then
     echo "Usage:"
     echo -e "\t buren edit <package>"
@@ -112,7 +112,7 @@ function __b_edit {
   fi
 }
 
-function __b_setup {
+__b_setup() {
   if [[ "$1" == "--help" || "$1" == "-help" ]]; then
     echo "usage:"
     echo -e "\t buren setup <arg>"
@@ -131,7 +131,7 @@ function __b_setup {
   fi
 }
 
-function __b_setup_os {
+__b_setup_os() {
   if [[ "$(uname)" == "Darwin" ]]; then
     sh ~/.buren/setup/os-install/install-osx.sh
   elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
@@ -139,7 +139,7 @@ function __b_setup_os {
   fi
 }
 
-function __b_setup_defaults {
+__b_setup_defaults() {
   if [[ "$(uname)" == "Darwin" ]]; then
     echo "Setting up defaults for OSX"
     __setup_osx_defaults
@@ -153,7 +153,7 @@ function __b_setup_defaults {
 #             HELP            #
 ###############
 
-function __buren-help {
+__buren-help() {
   echo "usage: "
   echo -e "\t buren update <pkg>"
   echo -e "\t buren self-destruct"

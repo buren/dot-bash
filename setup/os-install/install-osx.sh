@@ -4,14 +4,14 @@ mkdir ~/.buren/dot-bash-temp
 cd ~/.buren/dot-bash-temp && __osx_install
 cd $current_folder
 
-function __osx_install {
+__osx_install() {
   __install-homebrew-with-plugins
   __install-common-cli-programs
   __install-nmap
   __install-common-core
 }
 
-function __install-homebrew-with-plugins {
+__install-homebrew-with-plugins() {
    #!/bin/bash
   echo "=== Installing homebrew ==="
   mkdir homebrew && curl -L https://github.com/mxcl/homebrew/tarball/master | tar xz --strip 1 -C homebrew
@@ -37,7 +37,7 @@ function __install-homebrew-with-plugins {
   echo "\n\n"
 }
 
-function __install-common-core {
+__install-common-core() {
   # Install GNU core utilities (those that come with OS X are outdated)
   # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
   brew install coreutils
@@ -48,7 +48,7 @@ function __install-common-core {
   echo "$(brew --prefix coreutils)/libexec/gnubin" | sudo tee -a /etc/paths >/dev/null
 }
 
-function __install-common-cli-programs {
+__install-common-cli-programs() {
   brew install tree
   brew install wget
   # Install more recent versions of some OS X tools
@@ -60,7 +60,7 @@ function __install-common-cli-programs {
 }
 
 
-function __install-nmap {
+__install-nmap() {
   echo "Installing Nmap"
   brew install nmap
   echo "Nmap installed"
