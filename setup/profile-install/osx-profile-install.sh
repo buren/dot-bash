@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ## __SHAMELESS STEELS__ ##
 # https://github.com/mathiasbynens/dotfiles/blob/master/.osx
 

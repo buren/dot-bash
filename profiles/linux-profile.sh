@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # __LINUX__ ##
 
 # Add the below lines to sudoers file (at the bottom):

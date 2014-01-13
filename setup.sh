@@ -1,3 +1,5 @@
+#!/bin/bash
+
 __dot-bash-inject-to-profile() {
   if [[ -f ~/.bash_profile ]]; then
     echo "Injecting import: bash_profile"

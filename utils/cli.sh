@@ -1,3 +1,5 @@
+#!/bin/bash
+
 buren() {
   if  [[ -z "$1" ]]; then
     __buren-help

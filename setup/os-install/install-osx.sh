@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "Installing for OSX"
 $current_folder=$(pwd)
 mkdir ~/.buren/dot-bash-temp

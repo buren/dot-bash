@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "Installing Dot bash Linux"
 current_folder=$(pwd)
 cd ~/.buren/dot-bash-temp && __linux_install

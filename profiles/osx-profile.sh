@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ## __OS X__ ##
 source ~/.buren/dot-bash/setup/profile-install/osx-profile-install.sh # Install functions
 

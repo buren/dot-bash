@@ -1,3 +1,5 @@
+#!/bin/bash
+
 source ~/.buren/dot-bash/setup/config.sh
 source ~/.buren/dot-bash/profiles/unix-profile.sh
 source ~/.buren/dot-bash/profiles/bash-prompt.sh
