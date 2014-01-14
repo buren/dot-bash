@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set completion-ignore-case On # Ignore case on tab auto complete
+
 ## __DOT_BASH__ ##
 source ~/.buren/dot-bash/setup/profile-install/unix-profile-install.sh # Install functions
 
