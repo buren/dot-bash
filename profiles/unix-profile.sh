@@ -1,6 +1,17 @@
 #!/bin/bash
 
-set completion-ignore-case On # Ignore case on tab auto complete
+if [[ -f ~/.inputrc ]]; then
+  completion_inserted=$(cat ~/.inputrc | grep "completion-ignore-case")
+  if [[ -z $completion_inserted ]];then
+    echo "completion-ignore-case not set. Inserting to ~/.inputrc"
+    echo "set completion-ignore-case On" >> ~/.inputrc
+    echo "Inserted completion-ignore-case to ~/.inputrc..."
+  fi
+else
+  echo "No inputrc file found. Creating..."
+  echo "set completion-ignore-case On" > ~/.inputrc
+  echo "Inserted completion-ignore-case to ~/.inputrc..."
+fi
 
 ## __DOT_BASH__ ##
 source ~/.buren/dot-bash/setup/profile-install/unix-profile-install.sh # Install functions
