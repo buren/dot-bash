@@ -1,5 +1,5 @@
 # Default options
-export PRE_COMMIT_HOOK
+export PRE_COMMIT_HOOK=""
 export PRINT_CHECKLIST=false
 export PROMPT_ON_DONE=false
 # GitHub
