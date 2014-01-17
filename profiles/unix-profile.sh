@@ -25,6 +25,29 @@ alias reload="exec $SHELL -l"
 
 alias rsync='rsync --progress'
 
+## __RASPBERRY__ ##
+if [[ $B_HAS_RASPBERRY == true ]]; then
+  pi_login() {
+    ssh $B_PI_USERNAME@$B_PI_LOGIN
+  }
+  pi_printip() {
+    echo "$B_PI_LOGIN"
+  }
+  login_pi() {
+    pi_login
+  }
+  pi_browse() {
+    open http://$B_PI_LOGIN:$B_PI_BROWSE_PORT
+  }
+  pi_torrent() {
+    open http://$B_PI_LOGIN:$B_PI_TORRENT_PORT
+  }
+  pi_remote() {
+    open http://$B_PI_LOGIN:$B_PI_REMOTE_PORT
+  }
+fi
+
+
 # Counts the number of files in folder
 count_files() {
   ls $1 | wc -l
