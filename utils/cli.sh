@@ -1,4 +1,6 @@
-function buren {
+#!/bin/bash
+
+buren() {
   if  [[ -z "$1" ]]; then
     __buren-help
   else
@@ -6,7 +8,7 @@ function buren {
   fi
 }
 
-function __buren_functions {
+__buren_functions() {
   if   [[ "$1" == "self-destruct" ]]; then
     __b_self_destruct
   elif [[ "$1" == "update" ]]; then
@@ -15,6 +17,10 @@ function __buren_functions {
     __b_setup "$2"
   elif [[ "$1" == "edit" ]]; then
     __b_edit "$2"
+  elif [[ "$1" == "extend" ]]; then
+    __b_extend
+  elif [[ "$1" == "stat" ]]; then
+  __b_stat "$2" "$3"
   else
     echo "Unknown command '$1'"
     __buren-help
@@ -25,8 +31,25 @@ function __buren_functions {
 ###############
 #        FUNCTIONS        #
 ###############
+__buren-stat-help() {
+  echo "available:"
+  echo -e "'\t commands 2             prints 2 most popular commands (default: 12)"
+}
 
-function __b_self_destruct {
+__b_stat() {
+  if [[ "$1" == "commands" ]]; then
+    __b_popular_commands $2
+  else
+    echo "Unknown command '$1'"
+    __buren-stat-help
+  fi
+}
+
+__b_popular_commands() {
+  cut -f1 -d" " ~/.bash_history | sort | uniq -c | sort -nr | head -${1-12}
+}
+
+__b_self_destruct() {
   if [[ "$1" == "--help" || "$1" == "-help " ]]; then
     echo "usage:"
     echo -e "\t buren self-destruct"
@@ -43,11 +66,11 @@ function __b_self_destruct {
   fi
 }
 
-function __b_self_destruct_execute {
+__b_self_destruct_execute() {
   rm -rf ~/.buren
 }
 
-function __b_update {
+__b_update() {
   if   [[ "$1" == "--help" || "$1" == "-help" ]]; then
     echo "usage:"
     echo -e "\t buren update <pkg>"
@@ -71,22 +94,22 @@ function __b_update {
   fi
 }
 
-function __b_update_dot_bash {
+__b_update_dot_bash() {
   echo "Updating dot-bash"
   cd ~/.buren/dot-bash && git pull origin master
 }
 
-function __b_update_git_story {
+__b_update_git_story() {
   echo "Updating git-story"
   cd ~/.git-story && git pull origin master
 }
 
-function __b_update_util_scripts {
+__b_update_util_scripts() {
     echo "Updating util_scripts"
     cd ~/.buren/util_scripts && git pull origin master
 }
 
-function __b_edit {
+__b_edit() {
   if [[ "$1" == "--help" || "$1" == "-help" ]]; then
     echo "Usage:"
     echo -e "\t buren edit <package>"
@@ -95,14 +118,14 @@ function __b_edit {
     echo "Default:  dot-bash"
   else
     if  [[ -z "$1" ]]; then
-      $(subl ~/.buren/dot-bash)
+      $($B_EDITOR ~/.buren/dot-bash)
     else
       if [[ "$1" == "dot-bash" ]] || [ "$1" == "bash" ]; then
-        $(subl ~/.buren/dot-bash)
+        $($B_EDITOR ~/.buren/dot-bash/)
       elif [[ $1 == "git-story" ]] || [[ $1 == "git" ]]; then
-        $(subl ~/.git-story)
+        $($B_EDITOR ~/.git-story/)
       elif [[ $1 == "util_scripts" ]] || [[ $1 == "scripts" ]]; then
-        $(subl ~/.buren/util_scripts)
+        $($B_EDITOR ~/.buren/util_scripts/)
       else
         echo "Unkown package: $1"
         echo "Available packages:"
@@ -112,7 +135,17 @@ function __b_edit {
   fi
 }
 
-function __b_setup {
+__b_extend() {
+  if [[ ! -z $1 ]];then
+    echo -e "extend doesn't take any arguments."
+    echo "Ignoring all arguments"
+  fi
+  cd ~/.buren/dot-bash/
+    __b_edit "dot-bash"
+}
+
+
+__b_setup() {
   if [[ "$1" == "--help" || "$1" == "-help" ]]; then
     echo "usage:"
     echo -e "\t buren setup <arg>"
@@ -131,7 +164,7 @@ function __b_setup {
   fi
 }
 
-function __b_setup_os {
+__b_setup_os() {
   if [[ "$(uname)" == "Darwin" ]]; then
     sh ~/.buren/setup/os-install/install-osx.sh
   elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
@@ -139,7 +172,7 @@ function __b_setup_os {
   fi
 }
 
-function __b_setup_defaults {
+__b_setup_defaults() {
   if [[ "$(uname)" == "Darwin" ]]; then
     echo "Setting up defaults for OSX"
     __setup_osx_defaults
@@ -153,7 +186,7 @@ function __b_setup_defaults {
 #             HELP            #
 ###############
 
-function __buren-help {
+__buren-help() {
   echo "usage: "
   echo -e "\t buren update <pkg>"
   echo -e "\t buren self-destruct"

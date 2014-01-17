@@ -1,7 +1,9 @@
+#!/bin/bash
+
 ## __SHAMELESS STEELS__ ##
 # https://github.com/mathiasbynens/dotfiles/blob/master/.osx
 
-function __setup_osx_defaults {
+__setup_osx_defaults() {
   # Disable the sound effects on boot
   sudo nvram SystemAudioVolume=" "
 
