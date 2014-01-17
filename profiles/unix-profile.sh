@@ -14,7 +14,6 @@ alias rsync='rsync --progress'
 function count_files {
   ls $1 | wc -l
 }
-
 alias lc='count_files' # short hand for the above function
 
 alias hs='history | grep --color=auto'
@@ -324,7 +323,7 @@ alias gcheck='git checkout'
 alias gbranch='git branch'
 
 function gcommit {
-  git add .
+  git add --all
   git commit -m "$1"
 }
 
@@ -332,14 +331,14 @@ function gpush {
   if [ -z "$2" ]; then
     git push origin $1
   else
-    git add .
+    git add --all
     git commit -m "$2"
     git push origin $1
   fi
 }
 
 function gitfuckit {
-  gpush ${1-master} "update"
+  gpush ${1-master} ${1-update}
 }
 
 alias github_open="open \`git remote -v | grep git@github.com | grep fetch | head -1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/http:\/\//'\`"
