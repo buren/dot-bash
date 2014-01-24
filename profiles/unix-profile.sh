@@ -149,20 +149,25 @@ alias j="jump"
 # Usage:
 #       $ print_non_usascii path/to/file
 print_non_usascii() {
-  pcregrep --color='auto' -n "[\x80-\xFF]"
+  if [ "$(uname)" == "Darwin" ]; then
+    pcregrep --color='auto' -n "[\x80-\xFF]"
+  else
+    echo "Only checked on OSX"
+    echo "Can be installed with 'sudo apt-get install pcregrep'"
+  fi
 }
 
 
 ## __TERMINAL__ ##
 
-terminal-dark()  {
+terminal-dark() {
   if [[ ! -d ~/.buren/terminal-themes/gnome-terminal-colors-solarized ]]; then
     echo "Terminal themes not installed"
     __dot-bash-install-solarized-terminal-colors
   fi
   sh ~/.buren/terminal-themes/gnome-terminal-colors-solarized/set_dark.sh
 }
-terminal-light()  {
+terminal-light() {
   if [[ ! -d ~/.buren/terminal-themes/gnome-terminal-colors-solarized ]]; then
     echo "Terminal themes not installed"
     __dot-bash-install-solarized-terminal-colors

@@ -32,7 +32,7 @@ __dot-bash-install-ngrok() {
   rm ngrok.zip
 
   mkdir ~/.buren/bin
-  mv ngrok ~/.buren/bin
+  mv ngrok ~/.buren/bin/
   echo "Ngrok downloaded and installed in ~/.buren/bin"
   cd $current_folder
 }
