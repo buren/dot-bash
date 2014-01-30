@@ -47,12 +47,16 @@ if [[ $B_HAS_RASPBERRY == true ]]; then
   }
 fi
 
+count_size() {
+  du -ch $1 | grep total
+}
 
 # Counts the number of files in folder
 count_files() {
   ls $1 | wc -l
 }
 alias lc='count_files' # short hand for the above function
+alias l='ls -lAh --color'
 
 alias hs='history | grep --color=auto'
 alias o='open'
@@ -63,7 +67,7 @@ alias tree='tree -C $* | less -R'
 # Search running processes
 alias tm='ps -ef | grep --color=auto'
 
-# Do sudo to a command, or do sudo to the last typed command if no argument given
+# Do sudo a command, or do sudo to the last typed command if no argument given
 please() {
   if [[ $# == 0 ]]; then
     sudo $(history -p '!!')
@@ -87,7 +91,7 @@ redo_with() {
     $1 $(history -p '!*')
   fi
 }
-
+alias rw='redo_with'
 
 # Extract a lot of different archieve formats
 extract() {
@@ -110,6 +114,7 @@ extract() {
     echo "'$1' is not a valid file"
   fi
 }
+
 
 ## __NAVIGATION__ ##
 
@@ -245,9 +250,16 @@ servethis() {
     if [ ! -z "$1" ]; then
       cd $1
     fi
-    python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'
+    ret=`python -c 'import sys; print("%i" % (sys.hexversion<0x03000000))'`
+    if [ $ret -eq 0 ]; then    # Python version is >= 3
+      python -c 'python -m http.server 8765'
+    else                       # Python version is < 3
+      python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'
+    fi
   fi
 }
+
+
 
 # Simple chat server
 chat_client() {
@@ -383,6 +395,8 @@ gpush() {
 gitfuckit() {
   gpush ${1-master} ${2-update}
 }
+
+alias gprettylog='git log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"'
 
 alias github_open="open \`git remote -v | grep git@github.com | grep fetch | head -1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/http:\/\//'\`"
 
