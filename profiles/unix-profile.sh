@@ -365,13 +365,21 @@ alias rmigrate='bundle exec rake db:migrate'
 alias rroutes='bundle exec rake routes'
 
 ## __GIT__ ##
+git config --global help.autocorrect 1 # Auto correct misspellings
+git config --global color.ui auto      # Use colors by default
 
 alias gdiff='git diff --color'
+alias gmerged='git branch --merged'
+alias gunmerged='git branch --no-merged'
+alias gnomerged='gunmerged'
 alias gshow='git show  --color'
 alias glog='git log --graph --full-history --all --color'
 alias gadd='git add .'
 alias gcheck='git checkout'
 alias gbranch='git branch'
+# Finds
+alias gfindreg='git rev-list --all | xargs git grep'  # Find in history regex
+alias gfind='git rev-list --all | xargs git grep -F'  # FInd in history string search
 
 gcommit() {
   git add --all
