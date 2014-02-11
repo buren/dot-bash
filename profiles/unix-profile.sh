@@ -373,13 +373,14 @@ alias gmerged='git branch --merged'
 alias gunmerged='git branch --no-merged'
 alias gnomerged='gunmerged'
 alias gshow='git show  --color'
-alias glog='git log --graph --full-history --all --color'
+alias gprettylog='git log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"'
+alias glog='gprettylog'
 alias gadd='git add .'
 alias gcheck='git checkout'
 alias gbranch='git branch'
 # Finds
 alias gfindreg='git rev-list --all | xargs git grep'  # Find in history regex
-alias gfind='git rev-list --all | xargs git grep -F'  # FInd in history string search
+alias gfind='git rev-list --all | xargs git grep -F'  # Find in history string search
 
 gcommit() {
   git add --all
@@ -404,7 +405,7 @@ gitfuckit() {
   gpush ${1-master} ${2-update}
 }
 
-alias gprettylog='git log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"'
+
 
 alias github_open="open \`git remote -v | grep git@github.com | grep fetch | head -1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/http:\/\//'\`"
 
@@ -414,7 +415,7 @@ alias github_open="open \`git remote -v | grep git@github.com | grep fetch | hea
 alias hdeploy='git push heroku master'
 alias hconsole='heroku run console'
 alias hmigrate='heroku run rake db:migrate && heroku restart'
-
+alias hdeploymigrate='hdeploy && hmigrate'
 
 
 ## __UTILITY SCRIPTS__ ##
@@ -427,7 +428,7 @@ download() {
     echo "Optional options: --types=<first> <second> --selector=<html_selector>"
     echo "Example:"
     echo -e "\t download --url=example.com --types=pdf zip java --selector=.html-class"
-  elif [ ! -d ~/.buren/util_scripts/ ]; then
+  elif [ -d ~/.buren/util_scripts/ ]; then
     rvm use 2.0.0 && ~/.buren/util_scripts/downloader.thor fetch "$@"
   else
     echo "Cannot find ~/.buren/util_scripts/downloader.thor"
