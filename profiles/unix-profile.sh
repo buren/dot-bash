@@ -223,7 +223,7 @@ urlencode() {
 alias whois="whois -h whois-servers.net"
 
 # Makes localhost accessible through a tunnel
-servelocalhost() {
+ngrok() {
   if [ ! -f ~/.buren/bin/ngrok ];then
     echo "Ngrok not found in ~/.buren/bin/ngrok."
     __dot-bash-install-ngrok
@@ -232,13 +232,17 @@ servelocalhost() {
 
   if [[ -z "$1" ]] || [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
     echo "Usage:"
-    echo -e "\t servelocalhost <port>"
+    echo -e "\t ngrok <port>"
+    echo "or if ~/.ngrok config is set up"
+    echo -e "\t ngrok start <service>"
     echo "serve localhost on port"
+    echo "alias: servelocalhost"
   else
     echo "Starting ngrok"
-    ~/.buren/bin/ngrok $1 # $1 port
+    ~/.buren/bin/ngrok "$@" # $1 port
   fi
 }
+alias servelocalhost='ngrok'
 
 # Simple HTTPS server, serving current directory
 servethis() {
