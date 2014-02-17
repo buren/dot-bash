@@ -48,7 +48,16 @@ if [[ $B_HAS_RASPBERRY == true ]]; then
 fi
 
 count_size() {
-  du -ch $1 | grep total
+  du -sh $1
+}
+
+find_large_files() {
+  if [[ -z $1 ]]; then
+    folder="."
+  else
+    folder="$1"
+  fi
+  find $folder -type f -size +10000k -exec ls -lh {} \; | awk '{ print $9 ": " $5 }'
 }
 
 # Counts the number of files in folder
