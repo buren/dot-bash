@@ -302,6 +302,16 @@ chat_server() {
   fi
 }
 
+trace() {
+  if [ "$(uname)" == "Darwin" ]; then
+    if [[ ! -d '/usr/local/Cellar/mtr' ]]; then
+      echo "mtr not found installing"
+      __install-osx-mtr
+    fi
+  fi
+  mtr $@
+}
+
 
 # Show active network listeners
 alias netlisteners='netstat -untap'

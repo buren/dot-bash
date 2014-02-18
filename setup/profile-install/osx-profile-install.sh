@@ -58,3 +58,14 @@ __setup_osx_defaults() {
   # Disable automatic spell checking
   defaults write com.apple.mail SpellCheckingBehavior -string "NoSpellCheckingEnabled"
 }
+
+__install-osx-mtr() {
+  mtr_install_path='/usr/local/Cellar/mtr/0.85/sbin/mtr'
+  echo "Downloading mtr"
+  brew update && \
+  brew install mtr --no-gtk && echo -e "mtr installed \nChowning mtr to root" && \
+  sudo chown root:wheel $mtr_install_path && \
+  sudo chmod u+s $mtr_install_path && echo "mtr now owned by root" && \
+  sudo ln -s $mtr_install_path /usr/local/bin/mtr && echo 'Created symlink to mtr' || \
+  echo "Something went wrong"
+}
