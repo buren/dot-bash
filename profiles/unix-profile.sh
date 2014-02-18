@@ -311,6 +311,7 @@ trace() {
   fi
   mtr $@
 }
+alias mtr='trace'
 
 
 # Show active network listeners
