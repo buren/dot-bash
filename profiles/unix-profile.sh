@@ -393,8 +393,10 @@ git config --global help.autocorrect 1 # Auto correct misspellings
 git config --global color.ui auto      # Use colors by default
 
 alias gdiff='git diff --color'
-alias gmerged='git branch --merged'
+alias gitmerged='git branch --merged'
+alias gmerged='gitmerged'
 alias gunmerged='git branch --no-merged'
+alias gitnomerged='gunmerged'
 alias gnomerged='gunmerged'
 alias gshow='git show  --color'
 alias gprettylog='git log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"'
