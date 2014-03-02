@@ -44,6 +44,26 @@ __dot-bash-util-scripts-install() {
   cd $current_folder
 }
 
+__dot-bash-install-node-file-server() {
+  echo "Installing node"
+  current_folder=$(pwd)
+  if [[ "$(uname)" == "Darwin" ]]; then
+    brew install node
+  elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
+    sudo apt-get install nodejs npm node-semver
+  fi
+
+  cd ~/.buren/bin/
+  git clone https://github.com/buren/simple-file-server
+  npm install optimist
+  npm install http
+  npm install express
+  npm install winston
+  npm install lodash
+  cd $current_folder
+  echo "Successfully installed node and downloaded simple-file-server"
+}
+
 
 # Terminal colors
 __dot-bash-install-solarized-terminal-colors() {

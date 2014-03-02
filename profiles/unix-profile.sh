@@ -272,6 +272,19 @@ servethis() {
   fi
 }
 
+servethis-node() {
+  if [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
+    echo "Usage:"
+    echo -e "\t servethis-node <optional_directory>"
+    echo "serve the current/specified directory"
+  else
+    if [[ ! -d ~/.buren/bin/simple-file-server ]]; then
+      echo "Simple file server not found, downloading..."
+      __dot-bash-install-node-file-server
+    fi
+    node ~/.buren/bin/simple-file-server/server.js --port 8000 --folder $1
+  fi
+}
 
 
 # Simple chat server
@@ -468,3 +481,5 @@ download() {
 
 alias starwars='traceroute 216.81.59.173'
 alias print_ascii='man ascii'
+
+alias resize_to_width='convert -resize' # Resize args to width, keep aspect ratio
