@@ -37,7 +37,10 @@ sleepin() {
     pmset sleepnow
   else
     echo "Sleeping in $1 minutes"
-    sleep $(bc <<< $1*60) && pmset sleepnow
+    sleep $(bc <<< $1*60) && \
+    echo "Going to sleep" && \
+    pmset sleepnow
+
   fi
 }
 

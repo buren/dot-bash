@@ -404,14 +404,16 @@ alias rroutes='bundle exec rake routes'
 ## __GIT__ ##
 git config --global help.autocorrect 1 # Auto correct misspellings
 git config --global color.ui auto      # Use colors by default
+git config --global merge.stat true    # Always show merge stats
 
-alias gdiff='git diff --color'
+alias gdiff='git diff'
+alias gdiffstaged='git diff --staged'
 alias gitmerged='git branch --merged'
 alias gmerged='gitmerged'
 alias gunmerged='git branch --no-merged'
 alias gitnomerged='gunmerged'
 alias gnomerged='gunmerged'
-alias gshow='git show  --color'
+alias gshow='git show '
 alias gprettylog='git log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"'
 alias glog='gprettylog'
 alias gadd='git add .'
