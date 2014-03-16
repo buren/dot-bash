@@ -25,6 +25,12 @@ alias reload="exec $SHELL -l"
 
 alias rsync='rsync --progress'
 
+# Save output of ssh session to log file.
+sshlog() {
+  \ssh $@ 2>&1 | tee -a $(date +%Y%m%d).log
+}
+
+
 ## __RASPBERRY__ ##
 if [[ $B_HAS_RASPBERRY == true ]]; then
   pi_login() {
@@ -391,6 +397,28 @@ scan_os() {
 }
 # Logs all GET and POST requests on port 80
 alias sniff="sudo ngrep -d 'wlan0' -t '^(GET|POST) ' 'tcp and port 80'"
+
+translate() {
+  if [[ ! -d ~/.buren/bin/google-translate-cli ]];then
+    echo "google-translate-cli"
+    __dot-bash-install-translate-cli
+  fi
+  if [[ "$1" == "--help" ]] || [[ "$1" == "-help" ]];then
+    echo -e "usage:
+      $ translate {=en+ro+de+it} \"hola mundo\"
+      hello world
+      Bună ziua lume
+      Hallo Welt
+      ciao mondo
+
+      $ translate \"Saluton, mondo\"
+      Hello, world"
+    return
+  fi
+
+  trs "$@"
+}
+alias translate_to_swedish='translate {=sv}'
 
 
 ## __RAILS__ ##

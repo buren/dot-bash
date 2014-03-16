@@ -82,3 +82,14 @@ __dot-bash-install-lein-clojure() {
   /bin/lein "$@"
   echo "Installed lein clojure script"
 }
+
+
+__dot-bash-install-translate-cli() {
+  mkdir -p ~/.buren/bin/ && \
+  cd ~/.buren/bin/ && \
+  echo "Downloading google-translate-cli"
+  git clone git://github.com/soimort/google-translate-cli.git && \
+  cd  ~/.buren/bin/google-translate-cli/ && \
+  echo "Installing google-translate-cli" && \
+  make install
+}
