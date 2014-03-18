@@ -398,9 +398,12 @@ scan_os() {
 # Logs all GET and POST requests on port 80
 alias sniff="sudo ngrep -d 'wlan0' -t '^(GET|POST) ' 'tcp and port 80'"
 
+# Translate text with google-translate-cli
 translate() {
   if [[ ! -d ~/.buren/bin/google-translate-cli ]];then
-    echo "google-translate-cli"
+    echo "google-translate-cli not found.."
+    echo "Init install script"
+    sleep 1
     __dot-bash-install-translate-cli
   fi
   if [[ "$1" == "--help" ]] || [[ "$1" == "-help" ]];then
