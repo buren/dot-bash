@@ -302,7 +302,7 @@ cast-local() {
     echo "Cast (almost) any local video format."
     echo "Will start a web server at localhost:8000"
   fi
-  node ~/.buren/bin/cast-localvideo/app.js
+  cd ~/.buren/bin/cast-localvideo/ && node app.js
 }
 alias cast-local-video='cast-local'
 
