@@ -292,6 +292,19 @@ servethis-node() {
   fi
 }
 
+cast-local() {
+  if [[ ! -d ~/.buren/bin/cast-localvideo ]]; then
+    __dot-bash-install-cast-localvideo
+  fi
+  if [[ $1 == "-h" ]] || [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
+    echo "usage:"
+    echo -e "\t cast-local"
+    echo "Cast (almost) any local video format."
+    echo "Will start a web server at localhost:8000"
+  fi
+  node ~/.buren/bin/cast-localvideo/app.js
+}
+alias cast-local-video='cast-local'
 
 # Simple chat server
 chat_client() {
@@ -437,6 +450,7 @@ git config --global help.autocorrect 1 # Auto correct misspellings
 git config --global color.ui auto      # Use colors by default
 git config --global merge.stat true    # Always show merge stats
 
+alias gut='git'
 alias gdiff='git diff'
 alias gdiffstaged='git diff --staged'
 alias gitmerged='git branch --merged'

@@ -93,3 +93,14 @@ __dot-bash-install-translate-cli() {
   echo "Installing google-translate-cli" && \
   make install
 }
+
+__dot-bash-install-cast-localvideo() {
+  echo "Installing cast-localvideo"
+  mkdir -p ~/.buren/bin/
+  cd ~/.buren/bin/ \
+  && git clone https://github.com/mustafaakin/cast-localvideo.git \
+  && cd ~/.buren/bin/cast-localvideo \
+  && npm install
+  echo "Installed cast-localvideo"
+}
+
