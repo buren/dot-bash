@@ -5,6 +5,9 @@ source ~/.buren/dot-bash/profiles/unix-profile.sh
 source ~/.buren/dot-bash/profiles/bash-prompt.sh
 source ~/.buren/dot-bash/utils/cli.sh
 
+PATH=$PATH:$HOME/.buren/dot-bash/bin/
+export PATH
+
 # Git auto complete
 if [[ ! -f ~/.git-completion.bash ]]; then
   echo "Git auto complete list not found.. Downloading..."
@@ -26,3 +29,4 @@ if [[ "$(uname)" == "Darwin" ]]; then
 elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
   source ~/.buren/dot-bash/profiles/linux-profile.sh
 fi
+

@@ -1,5 +1,24 @@
 #!/bin/bash
 
+# Case-insensitive globbing (used in pathname expansion)
+shopt -s nocaseglob
+# Append to the Bash history file, rather than overwriting it
+shopt -s histappend
+# Autocorrect typos in path names when using `cd`
+shopt -s cdspell
+
+# Highlight section titles in manual pages
+export LESS_TERMCAP_md="${ORANGE}"
+# Always enable colored `grep` output
+export GREP_OPTIONS="--color=auto"
+
+# Larger bash history (allow 32³ entries; default is 500)
+export HISTSIZE=32768
+export HISTFILESIZE=${HISTSIZE}
+export HISTCONTROL=ignoredups
+# Make some commands not show up in history
+export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
+
 if [[ -f ~/.inputrc ]]; then
   completion_inserted=$(cat ~/.inputrc | grep "completion-ignore-case")
   if [[ -z $completion_inserted ]];then
