@@ -52,6 +52,9 @@ sshlog() {
 
 ## __RASPBERRY__ ##
 if [[ $B_HAS_RASPBERRY == true ]]; then
+  alias xbmc_start='sudo initctl start xbmc'
+  alias xbmc_stop='sudo initctl stop xbmc'
+
   pi_login() {
     ssh $B_PI_USERNAME@$B_PI_LOGIN
   }
@@ -324,6 +327,11 @@ cast-local() {
   cd ~/.buren/bin/cast-localvideo/ && node app.js
 }
 alias cast-local-video='cast-local'
+
+speedtest() {
+  wget http://cachefly.cachefly.net/100mb.test
+  rm 100mb.test
+}
 
 # Simple chat server
 chat_client() {
