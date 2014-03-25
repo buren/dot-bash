@@ -557,3 +557,11 @@ alias starwars='traceroute 216.81.59.173'
 alias print_ascii='man ascii'
 
 alias resize_to_width='convert -resize' # Resize args to width, keep aspect ratio
+
+2048-game() {
+  if [[ ! -d ~/.buren/bin/sed2048 ]]; then
+    echo -e "Could't not find 2048-sed.. Installing..."
+    __install-2048-sed
+  fi
+  bash ~/.buren/bin/sed2048/src/2048.sh
+}
