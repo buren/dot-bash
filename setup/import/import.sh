@@ -2,8 +2,11 @@
 
 source ~/.buren/dot-bash/setup/config.sh
 source ~/.buren/dot-bash/profiles/unix-profile.sh
-source ~/.buren/dot-bash/profiles/bash-prompt.sh
 source ~/.buren/dot-bash/utils/cli.sh
+
+if [[ $SHELL != "/bin/zsh" ]]; then
+  source ~/.buren/dot-bash/profiles/bash-prompt.sh
+fi
 
 # Add all files in bin/ to PATH
 PATH=$PATH:$HOME/.buren/dot-bash/bin/
