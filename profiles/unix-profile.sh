@@ -1,11 +1,13 @@
 #!/bin/bash
 
-# Case-insensitive globbing (used in pathname expansion)
-shopt -s nocaseglob
-# Append to the Bash history file, rather than overwriting it
-shopt -s histappend
-# Autocorrect typos in path names when using `cd`
-shopt -s cdspell
+if [[ $SHELL != '/bin/zsh' ]]; then
+  # Case-insensitive globbing (used in pathname expansion)
+  shopt -s nocaseglob
+  # Append to the Bash history file, rather than overwriting it
+  shopt -s histappend
+  # Autocorrect typos in path names when using `cd`
+  shopt -s cdspell
+fi
 
 # Highlight section titles in manual pages
 export LESS_TERMCAP_md="${ORANGE}"
