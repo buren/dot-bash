@@ -177,7 +177,7 @@ __b_setup_defaults() {
     echo "Setting up defaults for OSX"
     __setup_osx_defaults
   elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
-    echo "No defaults configured on Linux"
+    echo "No defaults configured for Linux"
   fi
 }
 

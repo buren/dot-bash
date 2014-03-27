@@ -22,7 +22,7 @@ export HISTCONTROL=ignoredups
 export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
 
 if [[ -f ~/.inputrc ]]; then
-  completion_inserted=$(cat ~/.inputrc | grep "completion-ignore-case")
+  completion_inserted=$(cat $HOME/.inputrc | grep "completion-ignore-case")
   if [[ -z $completion_inserted ]];then
     echo "completion-ignore-case not set. Inserting to ~/.inputrc"
     echo "set completion-ignore-case On" >> ~/.inputrc
@@ -30,7 +30,7 @@ if [[ -f ~/.inputrc ]]; then
   fi
 else
   echo "No inputrc file found. Creating..."
-  echo "set completion-ignore-case On" > ~/.inputrc
+  cat $HOME/.buren/dot-bash/.inputrc > $HOME/.inputrc
   echo "Inserted completion-ignore-case to ~/.inputrc..."
 fi
 
@@ -165,6 +165,34 @@ extract() {
   else
     echo "'$1' is not a valid file"
   fi
+}
+
+# Create a .tar.gz archive, using `zopfli`, `pigz` or `gzip` for compression
+function archive() {
+  local tmpFile="${@%/}.tar"
+  tar -cvf "${tmpFile}" --exclude=".DS_Store" "${@}" || return 1
+
+  size=$(
+    stat -f"%z" "${tmpFile}" 2> /dev/null; # OS X `stat`
+    stat -c"%s" "${tmpFile}" 2> /dev/null # GNU `stat`
+  )
+
+  local cmd=""
+  if (( size < 52428800 )) && hash zopfli 2> /dev/null; then
+    # the .tar file is smaller than 50 MB and Zopfli is available; use it
+    cmd="zopfli"
+  else
+    if hash pigz 2> /dev/null; then
+      cmd="pigz"
+    else
+      cmd="gzip"
+    fi
+  fi
+
+  echo "Compressing .tar using \`${cmd}\`…"
+  "${cmd}" -v "${tmpFile}" || return 1
+  [ -f "${tmpFile}" ] && rm "${tmpFile}"
+  echo "${tmpFile}.gz created successfully."
 }
 
 
@@ -579,4 +607,41 @@ alias resize_to_width='convert -resize' # Resize args to width, keep aspect rati
     __install-2048-sed
   fi
   bash ~/.buren/bin/sed2048/src/2048.sh
+}
+
+# Shorten given URL
+shortenurl() {
+  curl -s http://is.gd/api.php?longurl=`perl -MURI::Escape -e "print uri_escape('$1');"`
+  echo
+}
+
+# Display URL true destination
+expandurl() {
+  curl -sIL $1 | grep ^Location
+}
+
+function phpserver() {
+  local port="${1:-4000}"
+  # local ip=$(ipconfig getifaddr en1)
+  local ip='192.168.0.103'
+  sleep 1 && open "http://${ip}:${port}/" &
+  php -S "${ip}:${port}"
+}
+
+# Simple calculator
+function calc() {
+  local result=""
+  result="$(printf "scale=10;$*\n" | bc --mathlib | tr -d '\\\n')"
+  #                       └─ default (when `--mathlib` is used) is 20
+  #
+  if [[ "$result" == *.* ]]; then
+    # improve the output for decimal numbers
+    printf "$result" |
+    sed -e 's/^\./0./'        `# add "0" for cases like ".5"` \
+        -e 's/^-\./-0./'      `# add "0" for cases like "-.5"`\
+        -e 's/0*$//;s/\.$//'   # remove trailing zeros
+  else
+    printf "$result"
+  fi
+  printf "\n"
 }
