@@ -488,9 +488,9 @@ alias rmigrate='bundle exec rake db:migrate'
 alias rroutes='bundle exec rake routes'
 
 ## __GIT__ ##
-git config --global help.autocorrect 1 # Auto correct misspellings
-git config --global color.ui auto      # Use colors by default
-git config --global merge.stat true    # Always show merge stats
+git config --global help.autocorrect 20 # Auto correct misspellings
+git config --global color.ui auto       # Use colors by default
+git config --global merge.stat true     # Always show merge stats
 
 alias gut='git'
 alias gdiff='git diff'
