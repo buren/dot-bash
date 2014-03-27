@@ -57,6 +57,12 @@ __setup_osx_defaults() {
 
   # Disable automatic spell checking
   defaults write com.apple.mail SpellCheckingBehavior -string "NoSpellCheckingEnabled"
+  # Prevent Apps From Saving to iCloud by Default
+  defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool FALSE
+  # Disable dashboard screen
+  defaults write com.apple.dashboard mcx-disabled -boolean TRUE
+  # Display full path in Finder title
+  defaults write com.apple.finder _FXShowPosixPathInTitle -bool YES
 }
 
 __install-osx-mtr() {

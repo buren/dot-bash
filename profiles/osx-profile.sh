@@ -15,6 +15,10 @@ alias subl='slime'
 
 alias localip='ipconfig getifaddr en0'
 
+# Launch quicklook from termninal
+alias ql='qlmanage -p 2> /dev/null'
+alias quicklook='ql'
+
 # Overide 'marks' function in .unix-profile (to work consistently across osx/linux)
 marks() {
   \ls -l "$MARKPATH" | tail -n +2 | sed 's/  / /g' | cut -d' ' -f9- | awk -F ' -> ' '{printf "%-10s -> %s\n", $1, $2}'

@@ -106,6 +106,7 @@ __dot-bash-install-cast-localvideo() {
 
 __install-2048-sed() {
   echo "Installing 2048-sed"
+  mkdir -p ~/.buren/bin
   cd ~/.buren/bin/ \
   && git clone --depth=1 git@github.com:themattrix/sed2048.git \
   || echo "Something went wrong"
