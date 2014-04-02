@@ -38,6 +38,7 @@ export LESS_TERMCAP_md="$ORANGE"
 # Don’t clear the screen after quitting a manual page
 export MANPAGER="less -X"
 
+# TODO: Use symlink instead
 if [[ -f ~/.inputrc ]]; then
   completion_inserted=$(cat $HOME/.inputrc | grep "completion-ignore-case")
   if [[ -z $completion_inserted ]];then
@@ -50,7 +51,7 @@ else
   cat $HOME/.buren/dot-bash/.inputrc > $HOME/.inputrc
   echo "Inserted completion-ignore-case to ~/.inputrc..."
 fi
-
+# TODO: Use symlink instead
 if [[ ! -f ~/.curlrc ]];then
   echo "No curlrc found, injecting..."
   cat $HOME/.buren/dot-bash/.curlrc > $HOME/.curlrc
@@ -67,6 +68,12 @@ alias resource="source ~/.bash_profile"
 alias reload="exec $SHELL -l"
 
 alias rsync='rsync --progress'
+
+# SSH auto-completion based on entries in known_hosts.
+if [[ -e ~/.ssh/known_hosts ]]; then
+  complete -o default -W "$(cat ~/.ssh/known_hosts | sed 's/[, ].*//' | sort | uniq | grep -v '[0-9]')" ssh scp sftp
+fi
+
 
 # Save output of ssh session to log file.
 sshlog() {
@@ -604,9 +611,47 @@ gitfuckit() {
   gpush ${1-master} ${2-update}
 }
 
-
-
 alias github_open="open \`git remote -v | grep git@github.com | grep fetch | head -1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/http:\/\//'\`"
+
+# open all changed files (that still actually exist) in the editor
+function ged() {
+  local files=()
+  for f in $(git diff --name-only "$@"); do
+    [[ -e "$f" ]] && files=("${files[@]}" "$f")
+  done
+  local n=${#files[@]}
+  echo "Opening $n $([[ "$@" ]] || echo "modified ")file$([[ $n != 1 ]] && \
+    echo s)${@:+ modified in }$@"
+  atom "${files[@]}"
+}
+
+
+# add a github remote by github username
+function gra() {
+  if (( "${#@}" != 1 )); then
+    echo "Usage: gra githubuser"
+    return 1;
+  fi
+  local repo=$(gr show -n origin | perl -ne '/Fetch URL: .*github\.com[:\/].*\/(.*)/ && print $1')
+  gr add "$1" "git://github.com/$1/$repo"
+}
+
+# GitHub URL for current repo.
+function gurl() {
+  local remotename="${@:-origin}"
+  local remote="$(git remote -v | awk '/^'"$remotename"'.*\(push\)$/ {print $2}')"
+  [[ "$remote" ]] || return
+  local user_repo="$(echo "$remote" | perl -pe 's/.*://;s/\.git$//')"
+  echo "https://github.com/$user_repo"
+}
+
+
+# open last commit in GitHub, in the browser.
+function gfu() {
+  local n="${@:-1}"
+  n=$((n-1))
+  open $(git log -n 1 --skip=$n --pretty=oneline | awk "{printf \"$(gurl)/commit/%s\", substr(\$1,1,7)}")
+}
 
 
 ## __HEROKU__ ##
@@ -663,6 +708,11 @@ expandurl() {
   curl -sIL $1 | grep ^Location
 }
 
+# Set the terminal's title bar.
+function titlebar() {
+  echo -n $'\e]0;'"$*"$'\a'
+}
+
 function phpserver() {
   local port="${1:-4000}"
   # local ip=$(ipconfig getifaddr en1)
@@ -670,6 +720,100 @@ function phpserver() {
   sleep 1 && open "http://${ip}:${port}/" &
   php -S "${ip}:${port}"
 }
+
+function eachdir() {
+
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then cat <<HELP
+eachdir
+http://benalman.com/
+
+Usage: eachdir [dirs --] commands
+
+Run one or more commands in one or more dirs.
+
+By default, all subdirs of the current dir will be iterated over, but if --
+is specified as an arg, the dirs list will be made up of all args specified
+before it. All remaining args are the command(s) to be executed for each dir.
+
+Multiple commands must be specified as a single string argument.
+
+In bash, aliasing like this allows you to specify aliases/functions:
+  alias eachdir=". eachdir"
+
+Both of these print the working directory of every subdir of the current dir:
+  eachdir pwd
+  eachdir * -- pwd
+
+Perform a "git pull" inside all subdirs starting with repo-:
+  eachdir repo-* -- git pull
+
+Perform a few git-related commands inside all subdirs starting with repo-:
+  eachdir repo-* -- 'git fetch && git merge'
+
+Copyright (c) 2012 "Cowboy" Ben Alman
+Licensed under the MIT license.
+http://benalman.com/about/license/
+HELP
+return; fi
+
+if [ ! "$1" ]; then
+  echo 'You must specify one or more commands to run.'
+  return 1
+fi
+
+# For underlining headers.
+local h1="$(tput smul)"
+local h2="$(tput rmul)"
+
+# Store any dirs passed before -- in an array.
+local dashes d
+local dirs=()
+for d in "$@"; do
+  if [[ "$d" == "--" ]]; then
+    dashes=1
+    shift $(( ${#dirs[@]} + 1 ))
+    break
+  fi
+  dirs=("${dirs[@]}" "$d")
+done
+
+# If -- wasn't specified, default to all subdirs of the current dir.
+[[ "$dashes" ]] || dirs=(*/)
+
+local nops=()
+# Do stuff for each specified dir, in each dir. Non-dirs are ignored.
+for d in "${dirs[@]}"; do
+  # Skip non-dirs.
+  [[ ! -d "$d" ]] && continue
+  # If the dir isn't /, strip the trailing /.
+  [[ "$d" != "/" ]] && d="${d%/}"
+  # Execute the command, grabbing all stdout and stderr.
+  output="$( (cd "$d"; eval "$@") 2>&1 )"
+  if [[ "$output" ]]; then
+    # If the command had output, display a header and that output.
+    echo -e "${h1}${d}${h2}\n$output\n"
+  else
+    # Otherwise push it onto an array for later display.
+    nops=("${nops[@]}" "$d")
+  fi
+done
+
+# List any dirs that had no output.
+if [[ ${#nops[@]} > 0 ]]; then
+  echo "${h1}no output from${h2}"
+  for d in "${nops[@]}"; do echo "$d"; done
+fi
+
+} # END eachdir()
+
+# Stopwatch
+alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
+
+# JavaScriptCore REPL
+jscbin="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc"
+[ -e "${jscbin}" ] && alias jrb="${jscbin}"
+unset jscbin
+
 
 # Simple calculator
 function calc() {
@@ -688,11 +832,3 @@ function calc() {
   fi
   printf "\n"
 }
-
-# Stopwatch
-alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
-
-# JavaScriptCore REPL
-jscbin="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc"
-[ -e "${jscbin}" ] && alias jrb="${jscbin}"
-unset jscbin

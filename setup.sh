@@ -20,6 +20,9 @@ __dot-bash-inject-to-profile() {
     echo -e "To install add the below line to your bash profile."
     echo -e "\t cat ~/.buren/dot-bash/setup/import/import_to_bash_profile >> ~/.your_profile"
   fi
+  ln -s ~/.buren/dot-bash/.gemrc $HOME/.gemrc
+  ln -s ~/.buren/dot-bash/.gitconfig $HOME/.gitconfig
+  ln -s ~/.buren/dot-bash/.gitignore_global $HOME/.gitignore_global
 }
 
 mkdir ~/.buren

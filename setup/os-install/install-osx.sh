@@ -29,6 +29,7 @@ __install-homebrew-with-plugins() {
   brew tap phinze/homebrew-cask
   brew install brew-cask
   brew cask install qlcolorcode
+  brew cask install suspicious-package
   brew cask install qlstephen
   brew cask install qlmarkdown
   brew cask install quicklook-json

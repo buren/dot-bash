@@ -1,0 +1,47 @@
+[user]
+name = Jacob Burenstam
+email = burenstam@gmail.com
+
+[github]
+  user = buren
+
+[alias]
+  br = branch
+  cb = "!sh -c 'git branch $1 && git ch $1' -"
+
+  ci = commit
+  ch = checkout
+  cpush = "!sh -c 'git commit -au -m \"$1\" && git push -u origin' -"
+  d = diff
+
+  graph = log --graph
+  last = log -n 10
+  url = !git remote -v|sed "'s|.*git[:@]\\(.*\\).git.*|http://\\1|;s|m:|m/|'"|uniq|xargs open
+  whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
+  discard = checkout -- .
+
+[push]
+  default = current
+
+[color]
+  ui = true
+
+[core]
+  editor = atom --wait
+  excludesfile = /Users/buren/.gitignore_global
+
+[format]
+  pretty = %Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset
+  graph = true
+
+[help]
+	autocorrect = 20
+
+[log]
+  abbrevCommit = true
+
+[merge]
+	stat = true
+
+[mergetool]
+	keepBackup = true

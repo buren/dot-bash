@@ -50,6 +50,9 @@ __dot-bash-install-node-file-server() {
   if [[ "$(uname)" == "Darwin" ]]; then
     brew install node
   elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
+    echo "Will install node from apt-get beware that the version might be outdated."
+    echo "Continuing in 2 seconds..."
+    sleep 2
     sudo apt-get install nodejs npm node-semver
   fi
 

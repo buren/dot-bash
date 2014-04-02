@@ -19,6 +19,10 @@ alias localip='ipconfig getifaddr en0'
 alias ql='qlmanage -p 2> /dev/null'
 alias quicklook='ql'
 
+# Start ScreenSaver. This will lock the screen if locking is enabled.
+alias ss="open /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app"
+
+
 # Overide 'marks' function in .unix-profile (to work consistently across osx/linux)
 marks() {
   \ls -l "$MARKPATH" | tail -n +2 | sed 's/  / /g' | cut -d' ' -f9- | awk -F ' -> ' '{printf "%-10s -> %s\n", $1, $2}'

@@ -19,6 +19,8 @@ sleepin() {
 alias install='sudo apt-get install'
 alias update='sudo apt-get update'
 alias upgrade='sudo apt-get upgrade'
+alias remove="sudo apt-get remove"
+alias search="apt-cache search"
 
 # Mac OSX like 'open' command
 # Opens the given input with the default program associated for that type
