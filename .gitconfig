@@ -24,7 +24,7 @@ email = burenstam@gmail.com
   default = current
 
 [color]
-  ui = true
+	ui = auto
 
 [core]
   editor = atom --wait

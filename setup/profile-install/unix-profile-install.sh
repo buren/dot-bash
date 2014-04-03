@@ -57,7 +57,7 @@ __dot-bash-install-node-file-server() {
   fi
 
   cd ~/.buren/bin/
-  git clone https://github.com/buren/simple-file-server
+  git clone --depth=1 https://github.com/buren/simple-file-server
   npm install optimist
   npm install http
   npm install express
@@ -115,3 +115,4 @@ __install-2048-sed() {
   || echo "Something went wrong"
   echo "Installed"
 }
+

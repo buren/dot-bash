@@ -689,6 +689,16 @@ alias print_ascii='man ascii'
 
 alias resize_to_width='convert -resize' # Resize args to width, keep aspect ratio
 
+cleanup_whiteboard() {
+  if [[ $1 == "--help" ]] || [[ $1 == "-help" ]] || [[ $1 == "-h" ]]; then
+    echo "Clean up whiteboard picture"
+    echo "Usage: cleanup_whiteboard <input-image> <output-image>"
+    return
+  fi
+  convert $1 -morphology Convolve DoG:15,100,0 -negate -normalize -blur 0x1 -channel RBG -level 60%,91%,0.1 $2
+}
+
+
 2048-game() {
   if [[ ! -d ~/.buren/bin/sed2048 ]]; then
     echo -e "Could't not find 2048-sed.. Installing..."
@@ -814,6 +824,7 @@ jscbin="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources
 [ -e "${jscbin}" ] && alias jrb="${jscbin}"
 unset jscbin
 
+alias week='date +"%V"'
 
 # Simple calculator
 function calc() {

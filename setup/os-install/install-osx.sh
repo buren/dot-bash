@@ -22,6 +22,12 @@ __install-homebrew-with-plugins() {
   echo "=== Installing Homebrew bash-completion ==="
   brew install bash-completion
   echo "=== Installed Homebrew bash-completion ==="
+  echo "=== Installing GNU coreutils (ls, cat etc..) ==="
+  brew install coreutils
+  echo "=== Installed GNU coreutils ==="
+  echo "=== Installing GNU sed ==="
+  brew install gnu-sed --default-names # Install the latest version of GNU sed and install it as 'sed' and *not* 'gsed'
+  echo "=== Installed GNU sed ==="
   echo "\n\n"
   # ENHANCE OSX quicklook
   echo "=== Enhancing OSX quicklook ==="
