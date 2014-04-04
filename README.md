@@ -1,7 +1,7 @@
 ## Dot files.
 
 ### Install
-    curl http://bit.ly/1gnfItC | bash
+    curl -L http://bit.ly/1gnfItC | bash
 or if [bit.ly](https://bitly.com/) is down `curl https://raw.github.com/buren/dot-bash/master/setup.sh | bash`
 
 
