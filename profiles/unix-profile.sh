@@ -565,6 +565,9 @@ alias rc='bundle exec rails console'
 alias rmigrate='bundle exec rake db:migrate'
 alias rroutes='bundle exec rake routes'
 
+alias ruby2='rvm use 2.0.0'
+alias ruby19='rvm use 1.9.3'
+
 ## __GIT__ ##
 git config --global help.autocorrect 20 # Auto correct misspellings
 git config --global color.ui auto       # Use colors by default
@@ -722,6 +725,7 @@ expandurl() {
 function titlebar() {
   echo -n $'\e]0;'"$*"$'\a'
 }
+alias settitle='titlebar'
 
 function phpserver() {
   local port="${1:-4000}"
@@ -817,7 +821,7 @@ fi
 } # END eachdir()
 
 # Stopwatch
-alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
+alias stopwatch='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
 
 # JavaScriptCore REPL
 jscbin="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc"
