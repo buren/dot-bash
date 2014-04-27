@@ -2,6 +2,13 @@
 
 source ~/.buren/dot-bash/setup/config.sh
 source ~/.buren/dot-bash/profiles/unix-profile.sh
+source ~/.buren/dot-bash/profiles/aliases-profile.sh
+source ~/.buren/dot-bash/profiles/files-profile.sh
+source ~/.buren/dot-bash/profiles/git-profile.sh
+source ~/.buren/dot-bash/profiles/networking-profile.sh
+source ~/.buren/dot-bash/profiles/raspberry-profile.sh
+source ~/.buren/dot-bash/profiles/terminal-profile.sh
+source ~/.buren/dot-bash/profiles/ssh-profile.sh
 source ~/.buren/dot-bash/utils/cli.sh
 
 if [[ $SHELL != "/bin/zsh" ]]; then
