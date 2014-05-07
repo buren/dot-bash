@@ -163,8 +163,46 @@ terminal-light() {
   sh ~/.buren/terminal-themes/gnome-terminal-colors-solarized/set_light.sh
 }
 
+is_prime() {
+  check=$(((($1**2)+17)%12))
+  if [[ $check -eq 6 ]];then
+     echo "Yes"
+  else
+     echo "No"
+  fi
+}
+
+list_primes() {
+  prime_1=0
+  n=$1
+  if [[ -z $n ]]; then
+    echo "enter the range"
+    read n
+  fi
+  echo " Primenumber between 1 to $n is:"
+  echo "1"
+  echo "2"
+  for((i=3;i<=n;))
+  do
+  for((j=i-1;j>=2;))
+  do
+  if [  `expr $i % $j` -ne 0 ] ; then
+  prime_1=1
+  else
+  prime_1=0
+  break
+  fi
+  j=`expr $j - 1`
+  done
+  if [ $prime_1 -eq 1 ] ; then
+  echo $i
+  fi
+  i=`expr $i + 1`
+  done
+}
+
 # Simple calculator
-function calc() {
+calc() {
   local result=""
   result="$(printf "scale=10;$*\n" | bc --mathlib | tr -d '\\\n')"
   #                       └─ default (when `--mathlib` is used) is 20
