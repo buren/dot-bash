@@ -35,6 +35,13 @@ redo_with() {
 }
 alias rw='redo_with'
 
+betty() {
+  if [[ ! -d ~/.buren/bin/betty  ]]; then
+    echo 'Betty command not found..'
+    __dot-bash-install-betty
+  fi
+  ~/.buren/bin/betty/main.rb "$@"
+}
 
 alias starwars='traceroute 216.81.59.173'
 alias print_ascii='man ascii'

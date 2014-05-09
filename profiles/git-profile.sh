@@ -46,6 +46,12 @@ gitfuckit() {
   gpush ${1-master} ${2-update}
 }
 
+# TODO: cd to the cloned directory
+qclone()  {
+  clone_url=$1
+  git clone --depth=1 $clone_url
+}
+
 alias github_open="open \`git remote -v | grep git@github.com | grep fetch | head -1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/http:\/\//'\`"
 
 # open all changed files (that still actually exist) in the editor

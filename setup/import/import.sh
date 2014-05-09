@@ -22,8 +22,10 @@ export PATH
 # Git auto complete
 if [[ ! -f ~/.git-completion.bash ]]; then
   echo "Git auto complete list not found.. Downloading..."
-  curl -O https://raw.github.com/git/git/master/contrib/completion/git-completion.bash
-  mv ~/git-completion.bash ~/.git-completion.bash
+  cd ~ \
+  && curl -O https://raw.github.com/git/git/master/contrib/completion/git-completion.bash \
+  && mv ~/git-completion.bash ~/.git-completion.bash
+  echo "Done"
 fi
 source ~/.git-completion.bash
 

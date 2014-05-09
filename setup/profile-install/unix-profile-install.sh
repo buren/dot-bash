@@ -37,10 +37,21 @@ __dot-bash-install-ngrok() {
   cd $current_folder
 }
 
+__dot-bash-install-betty() {
+  echo "Downloading betty"
+  current_folder=$(pwd)
+  mkdir ~/.buren/bin
+  cd ~/.buren/bin \
+  && git clone --depth=1 https://github.com/pickhardt/betty \
+  && echo 'Installed betty in ~/.buren/bin' \
+  || echo 'Something went wrong installing betty, check the output.'
+  cd $current_folder
+}
+
 __dot-bash-util-scripts-install() {
   echo "Downloading util scripts"
   current_folder=$(pwd)
-  cd ~/.buren && git clone https://github.com/buren/util_scripts.git
+  cd ~/.buren && git clone --depth=1 https://github.com/buren/util_scripts.git
   cd $current_folder
 }
 
@@ -73,7 +84,7 @@ __dot-bash-install-solarized-terminal-colors() {
   echo "Installing terminal colors"
   mkdir ~/.buren/terminal-themes
   current_folder=$(pwd)
-  cd ~/.buren/terminal-themes && git clone https://github.com/sigurdga/gnome-terminal-colors-solarized.git
+  cd ~/.buren/terminal-themes && git clone --depth=1 https://github.com/sigurdga/gnome-terminal-colors-solarized.git
   echo "Terminal colors installed"
   cd $current_folder
 }
@@ -101,7 +112,7 @@ __dot-bash-install-cast-localvideo() {
   echo "Installing cast-localvideo"
   mkdir -p ~/.buren/bin/
   cd ~/.buren/bin/ \
-  && git clone https://github.com/mustafaakin/cast-localvideo.git \
+  && git clone --depth=1 https://github.com/mustafaakin/cast-localvideo.git \
   && cd ~/.buren/bin/cast-localvideo \
   && npm install
   echo "Installed cast-localvideo"
