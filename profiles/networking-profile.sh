@@ -29,7 +29,7 @@ urlencode() {
     echo -e "\t urlencode <any_string>"
     echo "URL-encodes specified string"
   else
-    python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"
+    python -c "import sys, urllib as ul; print ul.quote_plus('$1');"
   fi
 }
 

@@ -6,6 +6,15 @@ count_size() {
   du -sh $1
 }
 
+ls_file_permissions() {
+  if [ "$(uname)" == "Darwin" ]; then
+    stat -f '%A %a %N' *
+  else
+    stat -c '%A %a %N' *
+  fi
+}
+alias file_permissions="ls_file_permissions"
+
 find_large_files() {
   if [[ -z $1 ]]; then
     folder="."
