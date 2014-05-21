@@ -13,6 +13,12 @@ export CLICOLOR=1
 alias slime='open -a "Sublime Text 2"'
 alias subl='slime'
 
+alias chrome='open -a "Google Chrome"'
+alias google-chrome='chrome'
+
+alias chrome-canary='open -a "Google Chrome Canary"'
+alias google-chrome-canary='chrome'
+
 alias localip='ipconfig getifaddr en0'
 
 # Launch quicklook from termninal
