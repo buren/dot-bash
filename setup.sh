@@ -1,5 +1,14 @@
 #!/bin/bash
 
+__dot-bash-symlink() {
+  file=$1
+  if [[ -f ~/$file ]]; then
+    echo "$file already existing skipping symlink for $file"
+  else
+    ln -s ~/.buren/dot-bash/$file $HOME/$file && echo "Symlinked $file" || echo "Failed to symlink $file"
+  fi
+}
+
 __dot-bash-inject-to-profile() {
   if [[ -f ~/.bash_profile ]]; then
     echo "Injecting import: bash_profile"
@@ -20,9 +29,11 @@ __dot-bash-inject-to-profile() {
     echo -e "To install add the below line to your bash profile."
     echo -e "\t cat ~/.buren/dot-bash/setup/import/import_to_bash_profile >> ~/.your_profile"
   fi
-  ln -s ~/.buren/dot-bash/.gemrc $HOME/.gemrc
-  ln -s ~/.buren/dot-bash/.gitconfig $HOME/.gitconfig
-  ln -s ~/.buren/dot-bash/.gitignore_global $HOME/.gitignore_global
+  __dot-bash-symlink '.inputrc'
+  __dot-bash-symlink '.curlrc'
+  __dot-bash-symlink '.gemrc'
+  __dot-bash-symlink '.gitconfig'
+  __dot-bash-symlink '.gitconfig_global'
 }
 
 mkdir ~/.buren

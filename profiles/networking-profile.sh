@@ -2,6 +2,13 @@
 
 ## __NETWORKING__ ##
 
+headers() {
+  curl -sv "$@" 2>&1 >/dev/null |
+    grep -v "^\*" |
+    grep -v "^}" |
+    cut -c3-
+}
+
 # One of @janmoesen’s ProTips
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
   alias "$method"="lwp-request -m '$method'"

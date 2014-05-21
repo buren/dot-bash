@@ -38,25 +38,6 @@ export LESS_TERMCAP_md="$ORANGE"
 # Don’t clear the screen after quitting a manual page
 export MANPAGER="less -X"
 
-# TODO: Use symlink instead
-if [[ -f ~/.inputrc ]]; then
-  completion_inserted=$(cat $HOME/.inputrc | grep "completion-ignore-case")
-  if [[ -z $completion_inserted ]];then
-    echo "completion-ignore-case not set. Inserting to ~/.inputrc"
-    echo "set completion-ignore-case On" >> ~/.inputrc
-    echo "Inserted completion-ignore-case to ~/.inputrc..."
-  fi
-else
-  echo "No inputrc file found. Creating..."
-  cat $HOME/.buren/dot-bash/.inputrc > $HOME/.inputrc
-  echo "Inserted completion-ignore-case to ~/.inputrc..."
-fi
-# TODO: Use symlink instead
-if [[ ! -f ~/.curlrc ]];then
-  echo "No curlrc found, injecting..."
-  cat $HOME/.buren/dot-bash/.curlrc > $HOME/.curlrc
-fi
-
 ## __DOT_BASH__ ##
 source ~/.buren/dot-bash/setup/profile-install/unix-profile-install.sh # Install functions
 
@@ -119,6 +100,7 @@ translate() {
   trs "$@"
 }
 alias translate_to_swedish='translate {=sv}'
+alias translate_from_swedish='translate {sv=en}'
 
 ## __MISC__ ##
 
