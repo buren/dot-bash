@@ -20,7 +20,7 @@ __dot-bash-install-ngrok() {
       echo "Downloading ngrok for ARM proccessor"
       curl -O https://dl.ngrok.com/linux_arm/ngrok.zip
     else
-      echo "Downloading ngrok for i386 proccessor"
+      echo "Downloading ngrok for i386"
       curl -O https://dl.ngrok.com/linux_386/ngrok.zip
     fi
   else
@@ -31,7 +31,7 @@ __dot-bash-install-ngrok() {
   unzip ngrok.zip
   rm ngrok.zip
 
-  mkdir ~/.buren/bin
+  [[ ! -d ~/.buren/bin ]] && mkdir -p ~/.buren/bin
   mv ngrok ~/.buren/bin/
   echo "Ngrok downloaded and installed in ~/.buren/bin"
   cd $current_folder
@@ -99,9 +99,9 @@ __dot-bash-install-lein-clojure() {
 
 
 __dot-bash-install-translate-cli() {
-  mkdir -p ~/.buren/bin/ && \
+  [[ ! -d ~/.buren/bin ]] && mkdir -p ~/.buren/bin/
   cd ~/.buren/bin/ && \
-  echo "Downloading google-translate-cli"
+  echo "Downloading google-translate-cli" && \
   git clone git://github.com/soimort/google-translate-cli.git && \
   cd  ~/.buren/bin/google-translate-cli/ && \
   echo "Installing google-translate-cli" && \
@@ -109,21 +109,35 @@ __dot-bash-install-translate-cli() {
 }
 
 __dot-bash-install-cast-localvideo() {
+  current_folder=$(pwd)
   echo "Installing cast-localvideo"
-  mkdir -p ~/.buren/bin/
+  [[ ! -d ~/.buren/bin ]] && mkdir -p ~/.buren/bin/
   cd ~/.buren/bin/ \
   && git clone --depth=1 https://github.com/mustafaakin/cast-localvideo.git \
   && cd ~/.buren/bin/cast-localvideo \
   && npm install
   echo "Installed cast-localvideo"
+  cd $current_folder
 }
 
 __install-2048-sed() {
+  current_folder=$(pwd)
   echo "Installing 2048-sed"
-  mkdir -p ~/.buren/bin
+  [[ ! -d ~/.buren/bin ]] && mkdir -p ~/.buren/bin
   cd ~/.buren/bin/ \
-  && git clone --depth=1 git@github.com:themattrix/sed2048.git \
+  && git clone --depth=1 https://github.com/themattrix/sed2048.git \
   || echo "Something went wrong"
   echo "Installed"
+  cd $current_folder
 }
 
+__dot-bash-install-git-draw() {
+  current_folder=$(pwd)
+  echo 'Installing git-draw'
+  [[ ! -d ~/.buren/bin ]] && mkdir -p ~/.buren/bin
+  cd ~/.buren/bin/ \
+  && git clone --depth=1 https://github.com/buren/git-draw.git \
+  || echo "Something went wrong"
+  echo "git-draw installed"
+  cd $current_folder
+}

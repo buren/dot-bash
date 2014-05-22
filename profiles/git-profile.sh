@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## __GIT__ ##
-git config --global help.autocorrect 20 # Auto correct misspellings
+git config --global help.autocorrect 20 # Auto correct misspellings, after a 2 sec delay
 git config --global color.ui auto       # Use colors by default
 git config --global merge.stat true     # Always show merge stats
 
@@ -82,4 +82,17 @@ function gfu() {
   local n="${@:-1}"
   n=$((n-1))
   open $(git log -n 1 --skip=$n --pretty=oneline | awk "{printf \"$(gurl)/commit/%s\", substr(\$1,1,7)}")
+}
+
+git-draw() {
+  if [[ ! -d ~/.buren/bin/git-draw ]]; then
+    echo 'git-draw not found.'
+    __dot-bash-install-git-draw
+  fi
+  open_with=${1:-open}
+  ~/.buren/bin/git-draw/git-draw-watch ~/.buren/bin/git-draw/git-draw \
+  --hide-reflogs \
+  --hide-legend \
+  --hide-blobcontent \
+  --display-cmd $open_with
 }

@@ -85,6 +85,7 @@ servethis() {
 }
 
 servethis-node() {
+  mkdir ~/.buren/bin/
   if [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
     echo "Usage:"
     echo -e "\t servethis-node <optional_directory>"
