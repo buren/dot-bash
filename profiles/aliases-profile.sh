@@ -10,7 +10,7 @@ alias hdeploymigrate='hdeploy && hmigrate'
 ## __Ruby / RAILS__ ##
 
 # Rails aliases
-alias rs='bundle exec rails server'
+alias rs='bundle exec rails server --binding=127.0.0.1'
 alias rc='bundle exec rails console'
 alias rmigrate='bundle exec rake db:migrate && bundle exec rake db:migrate RAILS_ENV=test'
 alias rroutes='bundle exec rake routes'
