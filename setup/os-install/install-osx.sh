@@ -1,11 +1,5 @@
 #!/bin/bash
 
-echo "Installing for OSX"
-$current_folder=$(pwd)
-mkdir ~/.buren/dot-bash-temp
-cd ~/.buren/dot-bash-temp && __osx_install
-cd $current_folder
-
 __osx_install() {
   __install-homebrew-with-plugins
   __install-common-cli-programs
@@ -68,9 +62,14 @@ __install-common-cli-programs() {
   brew install homebrew/dupes/grep
 }
 
-
 __install-nmap() {
   echo "Installing Nmap"
   brew install nmap
   echo "Nmap installed"
 }
+
+echo "Installing for OSX"
+current_folder=$(pwd)
+mkdir ~/.buren/dot-bash-temp
+cd ~/.buren/dot-bash-temp && __osx_install
+cd $current_folder
