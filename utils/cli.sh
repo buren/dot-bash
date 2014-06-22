@@ -20,7 +20,16 @@ __buren_functions() {
   elif [[ "$1" == "extend" ]]; then
     __b_extend
   elif [[ "$1" == "stat" ]]; then
-  __b_stat "$2" "$3"
+    __b_stat "$2" "$3"
+  elif [[ "$1" == "list" ]];then
+    if [[ "$2" == "alias" ]] || [[ "$2" == "aliases" ]]; then
+      __b_list_aliases
+    elif [[ "$2" == "function" ]] || [[ "$2" == "functions" ]]; then
+      __b_list_functions
+    else
+      __b_list_aliases
+      __b_list_functions
+    fi
   else
     echo "Unknown command '$1'"
     __buren-help
@@ -47,6 +56,14 @@ __b_stat() {
 
 __b_popular_commands() {
   cut -f1 -d" " ~/.bash_history | sort | uniq -c | sort -nr | head -${1-12}
+}
+
+__b_list_functions() {
+  grep -rh '()' ~/.buren/dot-bash
+}
+
+__b_list_aliases() {
+  grep -rh 'alias ' ~/.buren/dot-bash
 }
 
 __b_self_destruct() {
