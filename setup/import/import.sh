@@ -23,9 +23,9 @@ export PATH
 if [[ ! -f ~/.git-completion.bash ]]; then
   echo "Git auto complete list not found.. Downloading..."
   cd ~ \
-  && curl -O https://raw.github.com/git/git/master/contrib/completion/git-completion.bash \
-  && mv ~/git-completion.bash ~/.git-completion.bash
-  echo "Done"
+  && touch ~/.git-completion.bash \
+  && curl -L https://raw.github.com/git/git/master/contrib/completion/git-completion.bash > ~/.git-completion.bash \
+  && echo "Done" || echo "Something went wrong downloading git-completion."
 fi
 source ~/.git-completion.bash
 
@@ -42,4 +42,3 @@ if [[ "$(uname)" == "Darwin" ]]; then
 elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
   source ~/.buren/dot-bash/profiles/linux-profile.sh
 fi
-
