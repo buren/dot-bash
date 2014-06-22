@@ -35,7 +35,7 @@ email = burenstam@gmail.com
   graph = true
 
 [help]
-	autocorrect = 20
+	autocorrect = 10
 
 [log]
   abbrevCommit = true
