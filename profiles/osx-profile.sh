@@ -9,8 +9,8 @@ alias la='ls -a'
 # Adds color to osx terminal
 export CLICOLOR=1
 
-# Alias for opening Sublime text 2
-alias slime='open -a "Sublime Text 2"'
+# Alias for opening Sublime text 3
+alias slime='open -a "Sublime Text"'
 alias subl='slime'
 
 alias chrome='open -a "Google Chrome"'
@@ -51,9 +51,19 @@ sleepin() {
     sleep $(bc <<< $1*60) && \
     echo "Going to sleep" && \
     pmset sleepnow
-
   fi
 }
+
+keepalive() {
+  if [[ -z "$1" ]]; then
+    echo 'Missing argument: <hours>'
+  else
+    local min_secs=$(bc <<< $1*60*60)
+    echo "Keeping alive $1 hours"
+    caffeinate -t $min_secs &
+  fi
+}
+
 
 ## __HOMEBREW__ ##
 

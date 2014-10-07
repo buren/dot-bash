@@ -114,3 +114,7 @@ cleanup_whiteboard() {
   fi
   convert $1 -morphology Convolve DoG:15,100,0 -negate -normalize -blur 0x1 -channel RBG -level 60%,91%,0.1 $2
 }
+
+random_password() {
+  openssl rand -base64 ${1:-12}
+}

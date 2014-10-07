@@ -11,8 +11,9 @@ sleepin() {
   if [[ -z "$1" ]]; then
     pmset sleepnow
   else
-    echo "Sleeping in $(bc <<< $1*60) minutes"
-    sleep $(bc <<< $1*60) && sudo pm-suspend
+    local min_secs=$(bc <<< $1*60)
+    echo "Sleeping in $min_secs minutes"
+    sleep $min_secs && sudo pm-suspend
   fi
 }
 

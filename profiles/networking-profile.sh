@@ -14,6 +14,13 @@ for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
   alias "$method"="lwp-request -m '$method'"
 done
 
+lan_hosts() {
+  echo Scanning..
+  local lan_hosts="$(arp -a | grep -v incomplete)"
+  echo -e "$lan_hosts"
+  echo -e "Found $(echo -e "$lan_hosts" | wc -l) online host(s)"
+}
+
 # Create a data URL from a file
 dataurl() {
   if [[ -z "$1" ]] || [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
@@ -258,3 +265,6 @@ function phpserver() {
   sleep 1 && open "http://${ip}:${port}/" &
   php -S "${ip}:${port}"
 }
+
+
+alias save_webpage='wget --page-requisites'

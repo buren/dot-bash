@@ -113,7 +113,7 @@ __dot-bash-install-cast-localvideo() {
   echo "Installing cast-localvideo"
   [[ ! -d ~/.buren/bin ]] && mkdir -p ~/.buren/bin/
   cd ~/.buren/bin/ \
-  && git clone --depth=1 https://github.com/mustafaakin/cast-localvideo.git \
+  && git clone --depth=1 https://github.com/buren/cast-localvideo.git \
   && cd ~/.buren/bin/cast-localvideo \
   && npm install
   echo "Installed cast-localvideo"
