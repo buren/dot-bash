@@ -14,6 +14,11 @@ for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
   alias "$method"="lwp-request -m '$method'"
 done
 
+googlecache() {
+  local url=$1
+  open "https://webcache.googleusercontent.com/search?q=cache:$url"
+}
+
 lan_hosts() {
   echo Scanning..
   local lan_hosts="$(arp -a | grep -v incomplete)"
