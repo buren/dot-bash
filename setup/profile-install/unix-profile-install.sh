@@ -131,6 +131,18 @@ __install-2048-sed() {
   cd $current_folder
 }
 
+__install-term2048() {
+  current_folder=$(pwd)
+  echo "Installing 2048-sed"
+  [[ ! -d ~/.buren/bin ]] && mkdir -p ~/.buren/bin
+  cd ~/.buren/bin/ \
+  && git clone --depth=1 https://github.com/bfontaine/term2048.git \
+  || echo "Something went wrong"
+  echo "Installed"
+  cd $current_folder
+  pip install term2048
+}
+
 __dot-bash-install-git-draw() {
   current_folder=$(pwd)
   echo 'Installing git-draw'
