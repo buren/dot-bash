@@ -245,7 +245,7 @@ download() {
     echo "Example:"
     echo -e "\t download --url=example.com --types=pdf zip java --selector=.html-class"
   elif [ -d ~/.buren/util_scripts/ ]; then
-    rvm use 2.0.0 && ~/.buren/util_scripts/downloader.thor fetch "$@"
+    ~/.buren/util_scripts/downloader.thor fetch "$@"
   else
     echo "Cannot find ~/.buren/util_scripts/downloader.thor"
     __dot-bash-util-scripts-install
