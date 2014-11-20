@@ -2,7 +2,7 @@
 
 ### Install
     curl -L http://bit.ly/1gnfItC | bash
-or if [bit.ly](https://bitly.com/) is down `curl https://raw.github.com/buren/dot-bash/master/setup.sh | bash`
+or if [bit.ly](https://bitly.com/) is down `curl -L https://raw.github.com/buren/dot-bash/master/setup.sh | bash`
 
 
 #### Notes
