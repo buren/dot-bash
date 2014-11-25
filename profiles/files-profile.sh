@@ -137,3 +137,13 @@ print_non_usascii() {
   fi
 }
 
+# Find by name
+find_by_filename() {
+  if [[ $1 == '--usage' ]]; then
+    echo 'find_by_filename $path $find_regex'
+    return
+  fi
+  local path=$1
+  local find_regex=$2
+  find $path -name $find_regex
+}

@@ -27,7 +27,7 @@ email = burenstam@gmail.com
 	ui = auto
 
 [core]
-  editor = atom --wait
+  editor = vim
   excludesfile = /Users/buren/.gitignore_global
 
 [format]

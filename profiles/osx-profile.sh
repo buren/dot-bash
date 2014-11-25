@@ -9,6 +9,8 @@ alias la='ls -a'
 # Adds color to osx terminal
 export CLICOLOR=1
 
+export EDITOR='open -a "Sublime Text"'
+
 # Alias for opening Sublime text 3
 alias slime='open -a "Sublime Text"'
 alias subl='slime'
@@ -17,7 +19,10 @@ alias chrome='open -a "Google Chrome"'
 alias google-chrome='chrome'
 
 alias chrome-canary='open -a "Google Chrome Canary"'
-alias google-chrome-canary='chrome'
+alias google-chrome-canary='chrome-canary'
+
+alias developer_chrome='open -a "Google Chrome" --args --allow-file-access-from-files'
+alias dev_chrome='developer_chrome'
 
 alias localip='ipconfig getifaddr en0'
 

@@ -89,7 +89,7 @@ servethis() {
     fi
     ret=`python -c 'import sys; print("%i" % (sys.hexversion<0x03000000))'`
     if [ $ret -eq 0 ]; then    # Python version is >= 3
-      python -c 'python -m http.server 8765'
+      python -c 'python -m http.server 8000'
     else                       # Python version is < 3
       python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'
     fi
