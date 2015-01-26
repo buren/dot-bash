@@ -6,6 +6,7 @@ email = burenstam@gmail.com
   user = buren
 
 [alias]
+  st = status -sb
   br = branch
   cb = "!sh -c 'git branch $1 && git ch $1' -"
 

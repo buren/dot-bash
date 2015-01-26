@@ -19,6 +19,11 @@ googlecache() {
   open "https://webcache.googleusercontent.com/search?q=cache:$url"
 }
 
+waybackmachine() {
+  local url=$1
+  open "https://web.archive.org/web/$url"
+}
+
 lan_hosts() {
   echo Scanning..
   local lan_hosts="$(arp -a | grep -v incomplete)"
@@ -273,3 +278,14 @@ function phpserver() {
 
 
 alias save_webpage='wget --page-requisites'
+
+hipchat() {
+  local room_id=$DEFAULT_HIPCHAT_ROOM
+  local owner_id=$DEAFAULT_OWNER_ID
+  local auth_token=$HIPCHAT_AUTH_TOKEN
+  local message="$1"
+  local color="$2"
+  # Send notification
+  curl --header "content-type: application/json" --header "Authorization: Bearer $auth_token" -X POST \
+    -d "{\"name\":\"dev\",\"privacy\":\"private\",\"is_archived\":false,\"is_guest_accessible\":false,\"topic\":\"cURL\",\"message\":\"$message\",\"color\":\"$color\",\"owner\":{\"id\":$owner_id}}" https://api.hipchat.com/v2/room/$room_id/notification
+}
