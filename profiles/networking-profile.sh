@@ -284,8 +284,8 @@ hipchat() {
   local owner_id=$DEAFAULT_OWNER_ID
   local auth_token=$HIPCHAT_AUTH_TOKEN
   local message="$1"
-  local color="$2"
+  local color=${2-yellow}
   # Send notification
   curl --header "content-type: application/json" --header "Authorization: Bearer $auth_token" -X POST \
-    -d "{\"name\":\"dev\",\"privacy\":\"private\",\"is_archived\":false,\"is_guest_accessible\":false,\"topic\":\"cURL\",\"message\":\"$message\",\"color\":\"$color\",\"owner\":{\"id\":$owner_id}}" https://api.hipchat.com/v2/room/$room_id/notification
+    -d "{\"name\":\"dev\",\"privacy\":\"private\",\"is_archived\":false,\"is_guest_accessible\":false,\"topic\":\"Msg\",\"message\":\"$message\",\"color\":\"$color\",\"owner\":{\"id\":$owner_id}}" https://api.hipchat.com/v2/room/$room_id/notification
 }
