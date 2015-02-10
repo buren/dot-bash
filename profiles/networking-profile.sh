@@ -289,3 +289,21 @@ hipchat() {
   curl --header "content-type: application/json" --header "Authorization: Bearer $auth_token" -X POST \
     -d "{\"name\":\"dev\",\"privacy\":\"private\",\"is_archived\":false,\"is_guest_accessible\":false,\"topic\":\"Msg\",\"message\":\"$message\",\"color\":\"$color\",\"owner\":{\"id\":$owner_id}}" https://api.hipchat.com/v2/room/$room_id/notification
 }
+
+announce_connection() {
+  ((count = 10000))                   # Maximum number to try.
+  while [[ $count -ne 0 ]] ; do
+    ping -c 1 8.8.8.8                 # Try once.
+    rc=$?
+    if [[ $rc -eq 0 ]] ; then
+        ((count = 1))                 # If okay, flag to exit loop.
+    fi
+    ((count = count - 1))             # So we don't go forever.
+  done
+
+  if [[ $rc -eq 0 ]] ; then           # Make final determination.
+    echo `say The internet is up.`
+  else
+    echo `say Timeout.`
+  fi
+}
