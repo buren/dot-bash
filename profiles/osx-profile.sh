@@ -78,3 +78,12 @@ fi
 
 # If possible, add tab completion for many more commands
 [ -f /etc/bash_completion ] && source /etc/bash_completion
+
+## __PDF__ ##
+
+pdf_merge() {
+  local output_file=$1
+  echo "Merging all PDFs to: $output_file"
+  shift
+  "/System/Library/Automator/Combine PDF Pages.action/Contents/Resources/join.py" -o $output_file "$@"
+}

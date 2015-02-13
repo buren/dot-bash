@@ -139,7 +139,7 @@ speedtest() {
 chat_client() {
   if [[ -z "$1" ]] || [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
     echo "Usage:"
-    echo -e "\t chat_server <optional_port>"
+    echo -e "\t chat_client <ip> <optional_port>"
     echo "connects to chat server on <ip> <optional_port>"
     echo "Default port: 55555"
   else
@@ -162,6 +162,8 @@ chat_server() {
     nc -l ${1-55555}
   fi
 }
+alias chatclient='chat_client'
+alias chatserver='chat_server'
 
 trace() {
   if [ "$(uname)" == "Darwin" ]; then
