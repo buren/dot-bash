@@ -216,6 +216,11 @@ list_primes() {
   done
 }
 
+# Current working directory for running processes of bash
+list_working_dirs() {
+  lsof | grep 'bash.*cwd'.
+}
+
 # Simple calculator
 calc() {
   local result=""
