@@ -16,7 +16,7 @@ alias rsb='be rails server --binding=127.0.0.1'
 alias rso='be rails server --binding=0.0.0.0'
 alias rsopen='rso'
 alias rc='be rails console'
-alias rmigrate='be rake db:migrate && be rake db:test:prepare'
+alias rmigrate='be rake db:migrate'
 alias rspec='be rspec'
 alias rroutes='be rake routes'
 

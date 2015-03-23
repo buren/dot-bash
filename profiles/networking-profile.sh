@@ -82,6 +82,19 @@ ngrok() {
 }
 alias servelocalhost='ngrok'
 
+servethis-ruby() {
+  if [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
+    echo "Usage:"
+    echo -e "\t servethis-node <optional_directory>"
+    echo "serve the current/specified directory"
+  else
+    if [ ! -z "$1" ]; then
+      cd $1
+    fi
+    ruby -run -e httpd . -p 8000
+  fi
+}
+
 # Simple HTTPS server, serving current directory
 servethis() {
   if [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then

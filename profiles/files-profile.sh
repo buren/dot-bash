@@ -130,9 +130,9 @@ alias j="jump"
 #       $ print_non_usascii path/to/file
 print_non_usascii() {
   if [ "$(uname)" == "Darwin" ]; then
-    pcregrep --color='auto' -n "[\x80-\xFF]"
+    pcregrep --color='auto' -n "[\x80-\xFF]" "$1"
   else
-    echo "Only checked on OSX"
+    echo "Only implemented on OSX"
     echo "Can be installed with 'sudo apt-get install pcregrep'"
   fi
 }
