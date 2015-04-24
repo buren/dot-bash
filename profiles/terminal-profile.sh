@@ -216,6 +216,11 @@ list_primes() {
   done
 }
 
+generate_password() {
+  local pass_length=${1-16}
+  openssl rand -base64 $pass_length
+}
+
 # Current working directory for running processes of bash
 list_working_dirs() {
   lsof | grep 'bash.*cwd'.

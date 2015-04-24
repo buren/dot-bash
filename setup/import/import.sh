@@ -30,7 +30,7 @@ fi
 source ~/.git-completion.bash
 
 if [[ ! -d ~/.git-story/ ]]; then
-  curl https://raw2.github.com/buren/git-story/master/setup/install | bash
+  curl https://raw.githubusercontent.com/buren/git-story/master/setup/install | bash
 fi
 
 if [[ ! -d ~/.buren/util_scripts/ ]]; then
