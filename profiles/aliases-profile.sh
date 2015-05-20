@@ -34,6 +34,8 @@ alias rsopen='rso'
 alias rc='rails_run rails console'
 alias rmigrate='rails_run rake db:migrate'
 alias rspec='rails_run rspec'
+alias rake='rails_run rake'
+alias rails='rails_run rails'
 alias rroutes='rails_run rake routes'
 
 alias ruby2='rvm use 2.0.0'

@@ -12,6 +12,8 @@ email = burenstam@gmail.com
 
   ci = commit
   ch = checkout
+  co = checkout
+  cp = checkpoint
   cpush = "!sh -c 'git commit -au -m \"$1\" && git push -u origin' -"
   d = diff
 
