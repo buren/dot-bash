@@ -16,7 +16,7 @@ if [[ $SHELL != "/bin/zsh" ]]; then
 fi
 
 # Add all files in bin/ to PATH
-PATH=$PATH:$HOME/.buren/dot-bash/bin/
+PATH=$PATH:$HOME/.buren/dot-bash/bin
 export PATH
 
 # Git auto complete
