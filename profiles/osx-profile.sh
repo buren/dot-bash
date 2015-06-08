@@ -9,7 +9,8 @@ alias la='ls -a'
 # Adds color to osx terminal
 export CLICOLOR=1
 
-export EDITOR='open -a "Sublime Text"'
+export EDITOR='atom -nw'
+alias e='$EDITOR'
 
 # Alias for opening Sublime text 3
 alias slime='open -a "Sublime Text"'

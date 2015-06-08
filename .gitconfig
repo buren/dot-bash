@@ -1,6 +1,6 @@
 [user]
-name = Jacob Burenstam
-email = burenstam@gmail.com
+	name = Jacob Burenstam
+	email = burenstam@gmail.com
 
 [github]
   user = buren
@@ -31,7 +31,7 @@ email = burenstam@gmail.com
 
 [core]
   editor = vim
-  excludesfile = /Users/buren/.gitignore_global
+	excludesfile = ~/.gitignore_global
 
 [format]
   pretty = %Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset

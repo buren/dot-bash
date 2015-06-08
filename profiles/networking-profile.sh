@@ -77,7 +77,7 @@ ngrok() {
     echo "alias: servelocalhost"
   else
     echo "Starting ngrok"
-    ~/.buren/bin/ngrok "$@" # $1 port
+    ~/.buren/bin/ngrok "$@"
   fi
 }
 alias servelocalhost='ngrok'

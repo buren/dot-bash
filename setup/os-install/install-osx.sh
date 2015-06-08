@@ -10,7 +10,7 @@ __osx_install() {
 __install-homebrew-with-plugins() {
    #!/bin/bash
   echo "=== Installing homebrew ==="
-  mkdir homebrew && curl -L https://github.com/mxcl/homebrew/tarball/master | tar xz --strip 1 -C homebrew
+  #mkdir homebrew && curl -L https://github.com/mxcl/homebrew/tarball/master | tar xz --strip 1 -C homebrew
   echo "=== Homebrew installed ==="
   echo "\n\n"
   echo "=== Installing Homebrew bash-completion ==="
