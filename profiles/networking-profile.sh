@@ -317,8 +317,8 @@ announce_connection() {
   done
 
   if [[ $rc -eq 0 ]] ; then           # Make final determination.
-    echo `say The internet is up.`
+    echo $(say The internet is up.)
   else
-    echo `say Timeout.`
+    echo $(say Timeout.)
   fi
 }

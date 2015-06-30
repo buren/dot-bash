@@ -9,6 +9,7 @@ source ~/.buren/dot-bash/profiles/networking-profile.sh
 source ~/.buren/dot-bash/profiles/raspberry-profile.sh
 source ~/.buren/dot-bash/profiles/terminal-profile.sh
 source ~/.buren/dot-bash/profiles/ssh-profile.sh
+source ~/.buren/dot-bash/profiles/utils-profile.sh
 source ~/.buren/dot-bash/utils/cli.sh
 
 if [[ $SHELL != "/bin/zsh" ]]; then
