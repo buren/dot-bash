@@ -66,6 +66,8 @@ alias treep='tree -C "$@" | less -R'
 # Search running processes
 alias tm='ps -ef | grep --color=auto'
 
+alias cpu_cores='nproc'
+
 # Clojure
 lein() {
   if [[ ! -f /bin/lein ]]; then

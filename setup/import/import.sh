@@ -4,6 +4,7 @@ source ~/.buren/dot-bash/setup/config.sh
 source ~/.buren/dot-bash/profiles/unix-profile.sh
 source ~/.buren/dot-bash/profiles/aliases-profile.sh
 source ~/.buren/dot-bash/profiles/files-profile.sh
+source ~/.buren/dot-bash/profiles/code-profile.sh
 source ~/.buren/dot-bash/profiles/git-profile.sh
 source ~/.buren/dot-bash/profiles/networking-profile.sh
 source ~/.buren/dot-bash/profiles/raspberry-profile.sh
