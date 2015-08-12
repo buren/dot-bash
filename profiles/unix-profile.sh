@@ -120,3 +120,12 @@ cleanup_whiteboard() {
 random_password() {
   openssl rand -base64 ${1:-12}
 }
+
+ricecake() {
+  local video='https://youtu.be/uYHAR8Xzsyo'
+  if [ "$(uname)" == "Darwin" ]; then
+    open $video
+  else
+    xdg-open $video
+  fi
+}
