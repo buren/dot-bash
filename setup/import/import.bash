@@ -46,4 +46,4 @@ elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
   source ~/.buren/dot-bash/profiles/linux-profile.bash
 fi
 
-echo 'Imported dot-bash.'
+echo 'Imported dot-bash by @buren'
