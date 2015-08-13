@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## __OS X__ ##
-source ~/.buren/dot-bash/setup/profile-install/osx-profile-install.sh # Install functions
+source ~/.buren/dot-bash/setup/profile-install/osx-profile-install.bash # Install functions
 
 alias ls='ls -G'
 alias la='ls -a'

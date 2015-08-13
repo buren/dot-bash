@@ -1,4 +1,4 @@
 
-if [ -f ~/.buren/dot-bash/setup/import/import.sh ]; then
-  source ~/.buren/dot-bash/setup/import/import.sh
+if [ -f ~/.buren/dot-bash/setup/import/import.bash ]; then
+  source ~/.buren/dot-bash/setup/import/import.bash
 fi

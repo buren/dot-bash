@@ -39,7 +39,7 @@ export LESS_TERMCAP_md="$ORANGE"
 export MANPAGER="less -X"
 
 ## __DOT_BASH__ ##
-source ~/.buren/dot-bash/setup/profile-install/unix-profile-install.sh # Install functions
+source ~/.buren/dot-bash/setup/profile-install/unix-profile-install.bash # Install functions
 
 ## __UNIX__ ##
 alias resource="source ~/.bash_profile"

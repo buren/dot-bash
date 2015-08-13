@@ -51,7 +51,7 @@ alias print_ascii='man ascii'
     echo -e "Could not find 2048-sed.. Installing..."
     __install-2048-sed
   fi
-  bash ~/.buren/bin/sed2048/src/2048.sh
+  bash ~/.buren/bin/sed2048/src/2048.bash
 }
 
 game-2048() {
@@ -168,14 +168,14 @@ terminal-dark() {
     echo "Terminal themes not installed"
     __dot-bash-install-solarized-terminal-colors
   fi
-  sh ~/.buren/terminal-themes/gnome-terminal-colors-solarized/set_dark.sh
+  sh ~/.buren/terminal-themes/gnome-terminal-colors-solarized/set_dark.bash
 }
 terminal-light() {
   if [[ ! -d ~/.buren/terminal-themes/gnome-terminal-colors-solarized ]]; then
     echo "Terminal themes not installed"
     __dot-bash-install-solarized-terminal-colors
   fi
-  sh ~/.buren/terminal-themes/gnome-terminal-colors-solarized/set_light.sh
+  sh ~/.buren/terminal-themes/gnome-terminal-colors-solarized/set_light.bash
 }
 
 is_prime() {
