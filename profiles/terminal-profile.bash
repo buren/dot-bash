@@ -10,6 +10,9 @@ common_commands() {
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
 
+alias utc='date -u'
+alias thetime='utc'
+
 # Do sudo a command, or do sudo to the last typed command if no argument given
 please() {
   if [[ $# == 0 ]]; then
