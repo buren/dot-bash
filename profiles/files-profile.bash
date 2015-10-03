@@ -100,6 +100,8 @@ alias ....='cd ../../../'
 alias .....='cd ../../../../'
 alias ......='cd ../../../../../'
 
+alias -- -='cd -' # Go to last directory
+
 
 # Quick navigation between folders
 # Usage:

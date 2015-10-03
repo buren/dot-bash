@@ -5,6 +5,11 @@ git config --global help.autocorrect 20 # Auto correct misspellings, after a 2 s
 git config --global color.ui auto       # Use colors by default
 git config --global merge.stat true     # Always show merge stats
 
+
+# If hub is installed alias it to git
+if type hub > /dev/null; then
+  alias git='hub'
+fi
 alias gut='git'
 alias gdiff='git diff'
 alias gdiffstaged='git diff --staged'
@@ -30,9 +35,9 @@ gcommit() {
 
 gpush() {
   if [ -z "$1" ]; then
-      echo "usage:"
-      echo "'\t gpush <branch> <commit_message>"
-      return
+    echo "usage:"
+    echo "'\t gpush <branch> <commit_message>"
+    return
   elif [ -z "$2" ]; then
     git push origin $1
   else
