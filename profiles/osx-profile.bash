@@ -34,6 +34,8 @@ alias quicklook='ql'
 # Start ScreenSaver. This will lock the screen if locking is enabled.
 alias ss="open /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app"
 
+alias stfu="osascript -e 'set volume output muted true'"
+alias pumpitup="osascript -e 'set volume 10'"
 
 # Overide 'marks' function in .unix-profile (to work consistently across osx/linux)
 marks() {

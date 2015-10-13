@@ -7,9 +7,9 @@ git config --global merge.stat true     # Always show merge stats
 
 
 # If hub is installed alias it to git
-if type hub > /dev/null; then
-  alias git='hub'
-fi
+#if type hub > /dev/null; then
+#  alias git='hub'
+#fi
 alias gut='git'
 alias gdiff='git diff'
 alias gdiffstaged='git diff --staged'

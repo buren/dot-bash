@@ -2,6 +2,9 @@
 
 alias rsync='rsync --progress'
 
+# Use GNU readlink to determine absolute filepaths
+alias realpath='greadlink -f'
+
 count_size() {
   du -sh $1
 }
