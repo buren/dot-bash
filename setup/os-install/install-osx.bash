@@ -15,6 +15,12 @@ __install-homebrew-with-plugins() {
   echo "\n\n"
   echo "=== Installing Homebrew bash-completion ==="
   brew install bash-completion
+  brew tap homebrew/completions
+  echo "
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+  . `brew --prefix`/etc/bash_completion
+fi
+" >> $HOME/.bash_profile
   echo "=== Installed Homebrew bash-completion ==="
   echo "=== Installing GNU coreutils (ls, cat etc..) ==="
   brew install coreutils
