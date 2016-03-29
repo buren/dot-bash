@@ -31,6 +31,11 @@ lan_hosts() {
   echo -e "Found $(echo -e "$lan_hosts" | wc -l) online host(s)"
 }
 
+# Returns what procesess are running on given port
+on_port() {
+  lsof -i :$1
+}
+
 # Create a data URL from a file
 dataurl() {
   if [[ -z "$1" ]] || [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then

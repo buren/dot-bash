@@ -33,6 +33,7 @@ fi
   echo "=== Enhancing OSX quicklook ==="
   brew update
   brew tap phinze/homebrew-cask
+  brew install cloc
   brew install brew-cask
   brew cask install qlcolorcode
   brew cask install suspicious-package
