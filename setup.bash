@@ -32,6 +32,7 @@ __dot-bash-inject-to-profile() {
   __dot-bash-symlink '.inputrc'
   __dot-bash-symlink '.curlrc'
   __dot-bash-symlink '.gemrc'
+  __dot-bash-symlink '.irbrc'
   __dot-bash-symlink '.gitconfig'
   __dot-bash-symlink '.gitconfig_global'
 }
