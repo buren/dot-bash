@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require 'av_capture' rescue `gem install av_capture` && require 'av_capture'
+require 'av_capture'
 
 # Create a recording session
 session = AVCapture::Session.new

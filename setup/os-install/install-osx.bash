@@ -26,7 +26,7 @@ fi
   brew install coreutils
   echo "=== Installed GNU coreutils ==="
   echo "=== Installing GNU sed ==="
-  brew install gnu-sed --default-names # Install the latest version of GNU sed and install it as 'sed' and *not* 'gsed'
+  brew install gnu-sed # Install the latest version of GNU sed and install it as 'sed' and *not* 'gsed'
   echo "=== Installed GNU sed ==="
   echo "\n\n"
   # ENHANCE OSX quicklook
