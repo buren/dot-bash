@@ -46,7 +46,8 @@ export BOLD
 export RESET
 
 function parse_git_dirty() {
-  [[ $(git status 2> /dev/null | tail -n1) != *"working directory clean"* ]] && echo "*"
+  status_line="$(git status 2> /dev/null | tail -n1)"
+  [[ "$status_line" != *"working directory clean"* && "$status_line" != *"working tree clean"* ]] && echo "*"
 }
 
 function parse_git_branch() {
