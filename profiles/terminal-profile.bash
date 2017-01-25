@@ -4,7 +4,14 @@ alias list_functions='compgen -A function'
 alias list_aliases='compgen -a'
 
 common_commands() {
-  history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n10
+  top_count=${1-10}
+  history | \
+    awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | \
+    grep -v "./" | \
+    column -c3 -s " " -t | \
+    sort -nr | \
+    nl | \
+   head -n$top_count
 }
 
 # Enable aliases to be sudo’ed
