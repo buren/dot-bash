@@ -56,14 +56,6 @@ betty() {
 alias starwars='traceroute 216.81.59.173'
 alias print_ascii='man ascii'
 
-2048-sed() {
-  if [[ ! -d ~/.buren/bin/sed2048 ]]; then
-    echo -e "Could not find 2048-sed.. Installing..."
-    __install-2048-sed
-  fi
-  bash ~/.buren/bin/sed2048/src/2048.bash
-}
-
 game-2048() {
  if [[ ! -d ~/.buren/bin/term2048 ]]; then
     echo -e "Could not find term2048.. Installing..."

@@ -122,17 +122,6 @@ __dot-bash-install-cast-localvideo() {
   cd $current_folder
 }
 
-__install-2048-sed() {
-  current_folder=$(pwd)
-  echo "Installing 2048-sed"
-  [[ ! -d ~/.buren/bin ]] && mkdir -p ~/.buren/bin
-  cd ~/.buren/bin/ \
-  && git clone --depth=1 https://github.com/themattrix/sed2048.git \
-  || echo "Something went wrong"
-  echo "Installed"
-  cd $current_folder
-}
-
 __install-term2048() {
   current_folder=$(pwd)
   echo "Installing 2048-sed"
