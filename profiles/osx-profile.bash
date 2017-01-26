@@ -42,6 +42,14 @@ marks() {
   \ls -l "$MARKPATH" | tail -n +2 | sed 's/  / /g' | cut -d' ' -f9- | awk -F ' -> ' '{printf "%-10s -> %s\n", $1, $2}'
 }
 
+mov_to_gif() {
+  infile="$1"
+  outfile="$2"
+
+  ffmpeg -i $infile -pix_fmt rgb24 -r 10 -f gif - | \
+    gifsicle --optimize=3 --delay=10 > $outfile
+}
+
 # Clean up LaunchServices to remove duplicates in the “Open With” menu
 alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
 
