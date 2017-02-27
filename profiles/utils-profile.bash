@@ -2,8 +2,7 @@
 
 repeat() {
   # Infinite loop
-  for (( ; ; ))
-  do
+  for (( ; ; ));then do
     eval "$@"
     sleep 1
   done
