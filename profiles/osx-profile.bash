@@ -82,13 +82,14 @@ keepalive() {
 
 
 ## __HOMEBREW__ ##
+if [[ $SHELL != "/bin/zsh" ]]; then
+  if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+  fi
 
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  . $(brew --prefix)/etc/bash_completion
+  # If possible, add tab completion for many more commands
+  [ -f /etc/bash_completion ] && source /etc/bash_completion
 fi
-
-# If possible, add tab completion for many more commands
-[ -f /etc/bash_completion ] && source /etc/bash_completion
 
 ## __PDF__ ##
 
