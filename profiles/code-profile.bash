@@ -9,14 +9,13 @@ IFS=$'\n\t'"
 
 # Modified from https://gist.github.com/namklabs/273055ef9c060af6ddc34a78910585a6
 function lorem(){
-  # Copy lorem ipsum to your clipboard in OS X
+  # Print lorem ipsum
 
   # usage:
 
-  # $ lorem <int> <htmlflag>
+  # $ lorem <int>
 
   # where <int> is how many paragraphs of lorem ipsum you want, each separated by 2 newlines
-  # and <htmlflag> is anything, indicating you want each paragraph surrounded by <p></p>. Omit if you don't want this.
 
   # Explanations
 
