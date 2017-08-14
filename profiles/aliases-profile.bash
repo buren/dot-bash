@@ -10,33 +10,25 @@ alias hdeploymigrate='hdeploy && hmigrate'
 ## __Ruby / RAILS__ ##
 
 # Rails aliases
-rails_run() {
-  local cmd="$@"
-  local run_cmd=''
-  if [[ -f bin/spring ]];then
-    local run_cmd='bin/spring'
-  else
-    local run_cmd='bundle exec'
-  fi
-  local full_cmd="$run_cmd $cmd"
-  $full_cmd
+alias be='bundle exec'
+alias sdown='spring stop'
+
+alias rs='test -f bin/rails && bin/rails server || \rails'
+alias rsb='test -f bin/rails && bin/rails server --binding=127.0.0.1 || \rails server --binding=127.0.0.1'
+alias rso='test -f bin/rails && bin/rails server --binding=0.0.0.0 || \rails server --binding=0.0.0.0'
+alias rsopen='rso'
+alias rc='test -f bin/rails && bin/rails console || \rails console'
+alias rmigrate='test -f bin/rake && bin/rails db:migrate || \rails db:migrate'
+alias rroutes='test -f bin/rake && bin/rake routes "$@" || \rake "$@"'
+
+function rails() {
+  test -f bin/rails && bin/rails "$@" || \rails "$@"
 }
 
-alias be='bundle exec'
-alias sp='bin/spring'
-alias sup='sp rails g'
-alias sdown='sp stop'
+function rspec() {
+  test -f bin/rspec && bin/rspec "$@" || \rspec "$@"
+}
 
-alias rs='rails_run rails server'
-alias rsb='rails_run rails server --binding=127.0.0.1'
-alias rso='rails_run rails server --binding=0.0.0.0'
-alias rsopen='rso'
-alias rc='rails_run rails console'
-alias rmigrate='rails_run rake db:migrate'
-alias rspec='rails_run rspec'
-alias rake='rails_run rake'
-alias rails='rails_run rails'
-alias rroutes='rails_run rake routes'
-
-alias ruby2='rvm use 2.0.0'
-alias ruby19='rvm use 1.9.3-p392'
+function rake() {
+  test -f bin/rake && bin/rake "$@" || \rake "$@"
+}

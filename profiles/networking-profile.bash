@@ -24,6 +24,11 @@ waybackmachine() {
   open "https://web.archive.org/web/$url"
 }
 
+rubygems() {
+  local query=$1
+  open "https://rubygems.org/search?utf8=%E2%9C%93&query=$query"
+}
+
 lan_hosts() {
   echo Scanning..
   local lan_hosts="$(arp -a | grep -v incomplete)"
