@@ -22,13 +22,13 @@ alias rmigrate='test -f bin/rake && bin/rails db:migrate || \rails db:migrate'
 alias rroutes='test -f bin/rake && bin/rake routes "$@" || \rake "$@"'
 
 function rails() {
-  test -f bin/rails && bin/rails "$@" || \rails "$@"
+  test -f bin/rails && bin/rails "$@" || command rails "$@"
 }
 
 function rspec() {
-  test -f bin/rspec && bin/rspec "$@" || \rspec "$@"
+  test -f bin/rspec && bin/rspec "$@" || command rspec "$@"
 }
 
 function rake() {
-  test -f bin/rake && bin/rake "$@" || \rake "$@"
+  test -f bin/rake && bin/rake "$@" || command rake "$@"
 }
