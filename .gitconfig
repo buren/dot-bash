@@ -30,8 +30,8 @@
 	ui = auto
 
 [core]
-  editor = vim
-	excludesfile = ~/.gitignore_global
+  editor = atom --wait
+  excludesfile = ~/.gitignore_global
 
 [format]
   pretty = %Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset
