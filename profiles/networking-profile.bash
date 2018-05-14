@@ -19,6 +19,17 @@ googlecache() {
   open "https://webcache.googleusercontent.com/search?q=cache:$url"
 }
 
+google() {
+  local search=''
+  echo "Searching for : $@"
+  for term in $@ ; do
+      echo "$term"
+      search="$search%20$term"
+  done
+
+  open "http://www.google.com/search?q=$search"
+}
+
 waybackmachine() {
   local url=$1
   open "https://web.archive.org/web/$url"
