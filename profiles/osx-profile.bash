@@ -43,8 +43,8 @@ marks() {
 }
 
 mov_to_gif() {
-  infile="$1"
-  outfile="$2"
+  local infile="$1"
+  local outfile="$2"
 
   ffmpeg -i $infile -pix_fmt rgb24 -r 10 -f gif - | \
     gifsicle --optimize=3 --delay=10 > $outfile
