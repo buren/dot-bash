@@ -50,6 +50,13 @@ mov_to_gif() {
     gifsicle --optimize=3 --delay=10 > $outfile
 }
 
+xls_to_csv() {
+  local xlsfile="$1"
+  local csvfile="$2"
+
+  ssconvert "$xlsfile" "$csvfile"
+}
+
 # Clean up LaunchServices to remove duplicates in the “Open With” menu
 alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
 
