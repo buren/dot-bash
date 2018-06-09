@@ -16,6 +16,13 @@ def time(times = 1)
   ret
 end
 
+def rspec(*args)
+  if args.length > 0
+    raise(ArgumentError, 'arguments to rspec within IRB session is currently not supported')
+  end
+  puts `rspec`
+end
+
 # list object methods
 def local_methods(obj=self)
   (obj.methods - obj.class.superclass.instance_methods).sort
