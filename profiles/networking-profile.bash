@@ -326,6 +326,10 @@ hipchat() {
     -d "{\"name\":\"dev\",\"privacy\":\"private\",\"is_archived\":false,\"is_guest_accessible\":false,\"topic\":\"Msg\",\"message\":\"$message\",\"color\":\"$color\",\"owner\":{\"id\":$owner_id}}" https://api.hipchat.com/v2/room/$room_id/notification
 }
 
+weather() {
+  curl wttr.in
+}
+
 announce_connection() {
   ((count = 10000))                   # Maximum number to try.
   while [[ $count -ne 0 ]] ; do
