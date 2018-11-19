@@ -216,7 +216,7 @@ alias netlisteners='netstat -untap'
 alias checkconnection="ping www.google.com"
 
 # Get external IP
-alias myip='curl ip.appspot.com'
+alias myip='curl checkip.amazonaws.com'
 alias externalip='myip'
 
 
