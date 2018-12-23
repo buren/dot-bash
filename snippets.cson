@@ -121,3 +121,16 @@
         gem '${1}'
       end
       '''
+
+  'Insert read CSV HoneyFormat':
+    'prefix': 'honeyformat'
+    'body':
+      '''
+      require 'honey_format'
+
+      file = File.read('${1}')
+      csv = HoneyFormat::CSV.new(file, delimiter: ',')
+      csv.rows.each do |row|
+        row.${2}
+      end
+      '''
