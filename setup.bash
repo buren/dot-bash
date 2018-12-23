@@ -1,7 +1,7 @@
 #!/bin/bash
 
 __dot-bash-symlink() {
-  file=$1
+  local file=$1
   if [[ -f ~/$file ]]; then
     echo "[WARNING] $file already existing skipping symlink for $file"
   else
