@@ -1,0 +1,123 @@
+# Your Atom snippets
+#
+# Atom snippets allow you to enter a simple prefix in the editor and hit tab to
+# expand the prefix into a larger code block with templated values.
+#
+# You can create a new snippet in this file by typing "snip" and then hitting
+# tab.
+#
+# An example CoffeeScript snippet to expand log to console.log:
+#
+# '.source.coffee':
+#   'Console log':
+#     'prefix': 'log'
+#     'body': 'console.log $1'
+#
+# Each scope (e.g. '.source.coffee' above) can only be declared once.
+#
+# This file uses CoffeeScript Object Notation (CSON).
+# If you are unfamiliar with CSON, you can read more about it in the
+# Atom Flight Manual:
+# https://flight-manual.atom.io/using-atom/sections/snippets/
+
+'.source.ruby':
+  'Disable rubocop LineLength':
+    'prefix': 'llen'
+    'body':
+      '# rubocop:disable Metrics/LineLength'
+
+  'Insert frozen string literal':
+    'prefix': 'frozen'
+    'body':
+      "# frozen_string_literal: true\n"
+
+  'Insert byebug':
+    'prefix': 'bye'
+    'body':
+      "require 'byebug'\nbyebug"
+
+  'Insert gem configuration block':
+    'prefix': 'gemconfig'
+    'body':
+      '''
+      def self.configuration
+        @configuration ||= Configuration.new
+      end
+
+      def self.config
+        configuration
+      end
+
+      def self.configure
+        yield(configuration) if block_given?
+        configuration
+      end
+
+      class Configuration
+        attr_accessor :${1}
+
+        def initialize
+          @${1}
+        end
+      end
+      '''
+
+  'def method_missing .. end':
+    'prefix': 'defmm'
+    'body':
+      '''
+      def method_missing(method_name, *arguments, &block)
+        if ${1}.respond_to?(method_name)
+          ${1}.public_send(method_name, *arguments, &block)
+        else
+          super
+        end
+      end
+
+      def respond_to_missing?(method_name, include_private = false)
+        ${1}.respond_to?(method_name) || super
+      end
+      '''
+
+  'Insert Ruby optparser':
+    'prefix': 'optparse'
+    'body':
+      '''
+      require 'optparse'
+
+      options = {}
+
+      OptionParser.new do |parser|
+        parser.banner = 'Usage: ${1:script_name} --help'
+        parser.default_argv = ARGV
+
+        parser.on('--${2:arg0}=val0', String, '') do |string|
+          options[:${2:arg0}] = string
+        end
+
+        parser.on('--${3:arg1}=first,second', Array, '') do |array|
+          options[:${3:arg1}] = array
+        end
+
+        parser.on('--[no-]${4:arg2}', '') do |boolean|
+          options[:${4:arg2}] = boolean
+        end
+
+        parser.on('-h', '--help', 'How to use') do
+          puts parser
+          exit
+        end
+      end.parse!
+      '''
+
+  'Insert inline bundler':
+    'prefix': 'bundleri'
+    'body':
+      '''
+      require 'bundler/inline'
+
+      gemfile do
+        source 'https://rubygems.org'
+        gem '${1}'
+      end
+      '''

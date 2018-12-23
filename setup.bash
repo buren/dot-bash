@@ -39,6 +39,8 @@ __dot-bash-inject-to-profile() {
   __dot-bash-symlink '.curlrc'
   __dot-bash-symlink '.gemrc'
   __dot-bash-symlink '.irbrc'
+  mkdir -p $HOME/.atom # ensure that root directory exists (if Atom is not installed)
+  __dot-bash-symlink 'snippets.cson' '.atom/'
   __dot-bash-symlink '.gitconfig'
   __dot-bash-symlink '.gitconfig_global'
 }
