@@ -5,7 +5,9 @@ __dot-bash-symlink() {
   if [[ -f ~/$file ]]; then
     echo "[WARNING] $file already existing skipping symlink for $file"
   else
-    ln -s ~/.buren/dot-bash/$file $HOME/$file && echo "Symlinked $file" || echo "[ERROR] Failed to symlink $file"
+    ln -s ~/.buren/dot-bash/$file $HOME/$file && \
+      echo "Symlinked $file" || \
+      echo "[ERROR] Failed to symlink $file"
   fi
 }
 
