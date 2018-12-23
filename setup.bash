@@ -2,10 +2,11 @@
 
 __dot-bash-symlink() {
   local file=$1
-  if [[ -f ~/$file ]]; then
+  local target_path=$HOME/$file
+  if [[ -f $target_path ]]; then
     echo "[WARNING] $file already existing skipping symlink for $file"
   else
-    ln -s ~/.buren/dot-bash/$file $HOME/$file && \
+    ln -s ~/.buren/dot-bash/$file $target_path && \
       echo "Symlinked $file" || \
       echo "[ERROR] Failed to symlink $file"
   fi
