@@ -50,6 +50,17 @@ mov_to_gif() {
     gifsicle --optimize=3 --delay=10 > $outfile
 }
 
+gif_to_mov() {
+  local infile="$1"
+  local outfile="$2"
+
+  ffmpeg -i "$infile" \
+    -movflags faststart \
+    -pix_fmt yuv420p \
+    -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" \
+    "$outfile"
+}
+
 xls_to_csv() {
   local xlsfile="$1"
   local csvfile="$2"
