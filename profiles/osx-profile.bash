@@ -9,7 +9,7 @@ alias la='ls -a'
 # Adds color to osx terminal
 export CLICOLOR=1
 
-export EDITOR='atom -nw'
+export EDITOR='code --wait --new-window'
 alias e='$EDITOR'
 
 # Alias for opening Sublime text 3
