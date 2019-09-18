@@ -30,7 +30,7 @@
 	ui = auto
 
 [core]
-  editor = atom --wait
+  editor = vim
   excludesfile = ~/.gitignore_global
 
 [format]
