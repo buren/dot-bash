@@ -183,9 +183,9 @@ __b_setup() {
 
 __b_setup_os() {
   if [[ "$(uname)" == "Darwin" ]]; then
-    bash ~/.buren/setup/os-install/install-osx.bash
+    bash ~/.buren/dot-bash/setup/os-install/install-osx.bash
   elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
-    bash ~/.buren/setup/os-install/install-linux.bash
+    bash ~/.buren/dot-bash/setup/os-install/install-linux.bash
   fi
 }
 
