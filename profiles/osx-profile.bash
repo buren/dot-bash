@@ -31,9 +31,6 @@ alias localip='ipconfig getifaddr en0'
 alias ql='qlmanage -p 2> /dev/null'
 alias quicklook='ql'
 
-# Start ScreenSaver. This will lock the screen if locking is enabled.
-alias ss="open /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app"
-
 alias stfu="osascript -e 'set volume output muted true'"
 alias pumpitup="osascript -e 'set volume 10'"
 
