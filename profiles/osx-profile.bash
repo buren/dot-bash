@@ -42,6 +42,12 @@ marks() {
   \ls -l "$MARKPATH" | tail -n +2 | sed 's/  / /g' | cut -d' ' -f9- | awk -F ' -> ' '{printf "%-10s -> %s\n", $1, $2}'
 }
 
+mov_to_mp4() {
+  local infile="$1"
+  local outfile="$2"
+  ffmpeg -i "$infile" -vcodec h264 -acodec mp2 "$outfile"
+}
+
 mov_to_gif() {
   local infile="$1"
   local outfile="$2"
