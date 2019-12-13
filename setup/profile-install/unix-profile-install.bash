@@ -14,21 +14,21 @@ __dot-bash-install-ngrok() {
 
   if [ "$(uname)" == "Darwin" ]; then
     echo "Downloading ngrok for OSX"
-    filename=ngrok_2.0.19_darwin_amd64.zip
+    filename=ngrok-stable-darwin-amd64.zip
   elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     if [[ "$(expr substr $(uname -m) 1 3)" == "arm" ]]; then
-      echo "Downloading ngrok for ARM proccessor"
-      filename=ngrok_2.0.19_linux_arm.zip
+      echo "Downloading ngrok for ARM 64 proccessor"
+      filename=ngrok-2.2.8-linux-arm64.zip
     else
       echo "Downloading ngrok for i386"
-      filename=ngrok_2.0.19_linux_amd64.zip
+      filename=ngrok-stable-linux-amd64.zip
     fi
   else
     echo "Unknown platform, cant install ngrok"
     exit 0
   fi
 
-  curl -O https://dl.ngrok.com/$filename
+  curl -O https://bin.equinox.io/c/4VmDzA7iaHb/$filename
 
   unzip $filename
   rm $filename
