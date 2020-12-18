@@ -6,6 +6,8 @@ source ~/.buren/dot-bash/setup/profile-install/osx-profile-install.bash # Instal
 alias ls='ls -G'
 alias la='ls -a'
 
+alias rosetta='arch -x86_64'
+
 # Adds color to osx terminal
 export CLICOLOR=1
 
