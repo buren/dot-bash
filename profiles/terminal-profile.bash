@@ -56,14 +56,6 @@ betty() {
 alias starwars='traceroute 216.81.59.173'
 alias print_ascii='man ascii'
 
-game-2048() {
- if [[ ! -d ~/.buren/bin/term2048 ]]; then
-    echo -e "Could not find term2048.. Installing..."
-    __install-term2048
-  fi
-  term2048
-}
-
 # Set the terminal's title bar.
 function titlebar() {
   echo -n $'\e]0;'"$*"$'\a'
