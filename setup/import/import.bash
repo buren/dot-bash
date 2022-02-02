@@ -11,6 +11,7 @@ source ~/.buren/dot-bash/profiles/raspberry-profile.bash
 source ~/.buren/dot-bash/profiles/terminal-profile.bash
 source ~/.buren/dot-bash/profiles/ssh-profile.bash
 source ~/.buren/dot-bash/utils/cli.bash
+source ~/.buren/dot-bash/games/games.bash
 if [[ $SHELL != "/bin/zsh" ]]; then
   source ~/.buren/dot-bash/profiles/utils-profile.bash
   source ~/.buren/dot-bash/profiles/autocomplete-man-profile.bash
