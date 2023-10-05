@@ -36,6 +36,11 @@ alias quicklook='ql'
 alias stfu="osascript -e 'set volume output muted true'"
 alias pumpitup="osascript -e 'set volume 10'"
 
+toggle_dark_mode() {
+  echo "Toggling dark/light mode"
+  osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to not dark mode'
+}
+
 restart_input_source_switcher() {
   echo "Killing macOS input source switcher, will reboot in a few seconds"
   sudo killall -9 PAH_Extension TextInputMenuAgent TextInputSwitcher
