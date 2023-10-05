@@ -36,6 +36,11 @@ alias quicklook='ql'
 alias stfu="osascript -e 'set volume output muted true'"
 alias pumpitup="osascript -e 'set volume 10'"
 
+restart_input_source_switcher() {
+  echo "Killing macOS input source switcher, will reboot in a few seconds"
+  sudo killall -9 PAH_Extension TextInputMenuAgent TextInputSwitcher
+}
+
 # Overide 'marks' function in .unix-profile (to work consistently across osx/linux)
 marks() {
   \ls -l "$MARKPATH" | tail -n +2 | sed 's/  / /g' | cut -d' ' -f9- | awk -F ' -> ' '{printf "%-10s -> %s\n", $1, $2}'
