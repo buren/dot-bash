@@ -34,7 +34,7 @@
   'Insert byebug':
     'prefix': 'bye'
     'body':
-      "require 'byebug'\nbyebug"
+      "require 'byebug';byebug"
 
   'Insert gem configuration block':
     'prefix': 'gemconfig'

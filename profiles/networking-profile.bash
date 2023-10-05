@@ -81,28 +81,6 @@ urlencode() {
 # Enhanced WHOIS lookups
 alias whois="whois -h whois-servers.net"
 
-# Makes localhost accessible through a tunnel
-ngrok() {
-  if [ ! -f ~/.buren/bin/ngrok ];then
-    echo "Ngrok not found in ~/.buren/bin/ngrok."
-    __dot-bash-install-ngrok
-    echo "Installation finished."
-  fi
-
-  if [[ -z "$1" ]] || [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
-    echo "Usage:"
-    echo -e "\t ngrok <port>"
-    echo "or if ~/.ngrok config is set up"
-    echo -e "\t ngrok start <service>"
-    echo "serve localhost on port"
-    echo "alias: servelocalhost"
-  else
-    echo "Starting ngrok"
-    ~/.buren/bin/ngrok "$@"
-  fi
-}
-alias servelocalhost='ngrok'
-
 servethis-ruby() {
   if [[ $1 == "-help" ]] || [[ $1 == "--help" ]]; then
     echo "Usage:"

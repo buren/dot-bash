@@ -4,41 +4,6 @@
 # INSTALLS UPON USE #
 ###############
 
-# Install Ngrok
-__dot-bash-install-ngrok() {
-  echo "Downloading Ngrok"
-
-  current_folder=$(pwd)
-  mkdir -p ~/.buren/dot-bash-temp
-  cd ~/.buren/dot-bash-temp
-
-  if [ "$(uname)" == "Darwin" ]; then
-    echo "Downloading ngrok for OSX"
-    filename=ngrok-stable-darwin-amd64.zip
-  elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    if [[ "$(expr substr $(uname -m) 1 3)" == "arm" ]]; then
-      echo "Downloading ngrok for ARM 64 proccessor"
-      filename=ngrok-2.2.8-linux-arm64.zip
-    else
-      echo "Downloading ngrok for i386"
-      filename=ngrok-stable-linux-amd64.zip
-    fi
-  else
-    echo "Unknown platform, cant install ngrok"
-    exit 0
-  fi
-
-  curl -O https://bin.equinox.io/c/4VmDzA7iaHb/$filename
-
-  unzip $filename
-  rm $filename
-
-  [[ ! -d ~/.buren/bin ]] && mkdir -p ~/.buren/bin
-  mv ngrok ~/.buren/bin/
-  echo "Ngrok downloaded and installed in ~/.buren/bin"
-  cd $current_folder
-}
-
 __dot-bash-install-betty() {
   echo "Downloading betty"
   current_folder=$(pwd)
