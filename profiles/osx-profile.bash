@@ -51,16 +51,16 @@ marks() {
   \ls -l "$MARKPATH" | tail -n +2 | sed 's/  / /g' | cut -d' ' -f9- | awk -F ' -> ' '{printf "%-10s -> %s\n", $1, $2}'
 }
 
-mov_to_mp4() {
+mov_to_mp4 () {
   local infile="$1"
-  local outfile="$2"
+  local outfile="${2:-${infile%.*}.mp4}"
 
   ffmpeg -i "$infile" -vcodec h264 -acodec aac -strict -2 "$outfile"
 }
 
 mov_to_gif() {
   local infile="$1"
-  local outfile="$2"
+  local outfile="${2:-${infile%.*}.gif}"
 
   ffmpeg -i $infile -pix_fmt rgb24 -r 10 -f gif - | \
     gifsicle --optimize=3 --delay=10 > $outfile
@@ -68,7 +68,7 @@ mov_to_gif() {
 
 gif_to_mov() {
   local infile="$1"
-  local outfile="$2"
+  local outfile="${2:-${infile%.*}.mov}"
 
   ffmpeg -i "$infile" \
     -movflags faststart \
@@ -79,7 +79,7 @@ gif_to_mov() {
 
 xls_to_csv() {
   local xlsfile="$1"
-  local csvfile="$2"
+  local csvfile="${2:-${xlsfile%.*}.csv}"
 
   ssconvert "$xlsfile" "$csvfile"
 }
