@@ -1,6 +1,8 @@
+# inspiration from https://blog.gitbutler.com/how-git-core-devs-configure-git/
+
 [user]
-	name = Jacob Burenstam
-	email = burenstam@gmail.com
+  name = Jacob Burenstam Linder
+  email = burenstam@gmail.com
 
 [github]
   user = buren
@@ -23,32 +25,73 @@
   whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
   discard = checkout -- .
 
+[column]
+  ui = auto
+
+[branch]
+  sort = -committerdate
+
+[tag]
+  sort = version:refname
+
+[init]
+  defaultBranch = main
+
+[diff]
+  algorithm = histogram
+  colorMoved = plain
+  mnemonicPrefix = true
+  renames = true
+
+[fetch]
+  prune = true
+  pruneTags = true
+  all = true
+
 [push]
-  default = current
+  default = simple
+  autoSetupRemote = true
+  followTags = true
+
+[pull]
+  # rebase = true
 
 [color]
-	ui = auto
+  ui = auto
+
+[rerere]
+  enabled = true
+  autoupdate = true
+
+[rebase]
+  autoSquash = true
+  autoStash = true
+  updateRefs = true
 
 [core]
   editor = vim
   excludesfile = ~/.gitignore_global
+  # fsmonitor = true
+  # untrackedCache = true
 
 [format]
   pretty = %Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset
   graph = true
 
 [help]
-	autocorrect = 20
+  autocorrect = prompt
 
 [log]
   abbrevCommit = true
 
 [merge]
-	stat = true
+  stat = true
+  # (just 'diff3' if git version < 2.3)
+  # conflictstyle = zdiff3
 
 [mergetool]
-	keepBackup = true
+  keepBackup = true
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
-	required = true
+  clean = git-lfs clean %f
+  smudge = git-lfs smudge %f
+  required = true
